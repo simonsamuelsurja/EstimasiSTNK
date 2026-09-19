@@ -1,0 +1,562 @@
+[
+  {
+    "kecamatan": "Abadijaya",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Babakan",
+    "samsat": "Cikokol"
+  },
+  {
+    "kecamatan": "Baktijaya",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Balaraja",
+    "samsat": "Balaraja"
+  },
+  {
+    "kecamatan": "Bandung",
+    "samsat": "Bandung"
+  },
+  {
+    "kecamatan": "Batu Ceper",
+    "samsat": "Cikokol"
+  },
+  {
+    "kecamatan": "Bedahan",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Beji",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Beji Timur",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Bekasi",
+    "samsat": "Bekasi"
+  },
+  {
+    "kecamatan": "Bencongan",
+    "samsat": "Kelapa Dua"
+  },
+  {
+    "kecamatan": "Benda",
+    "samsat": "Cikokol"
+  },
+  {
+    "kecamatan": "BJ. Gede",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "BJ. Pondok Terong",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Bogor",
+    "samsat": "Bogor"
+  },
+  {
+    "kecamatan": "Bojongsari",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Bojongsari Baru",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Cabangbungin",
+    "samsat": "Cikarang"
+  },
+  {
+    "kecamatan": "Cibinong",
+    "samsat": "Kab. Bogor"
+  },
+  {
+    "kecamatan": "Cibodas",
+    "samsat": "Cikokol"
+  },
+  {
+    "kecamatan": "Cikarang",
+    "samsat": "Cikarang"
+  },
+  {
+    "kecamatan": "Cikokol",
+    "samsat": "Cikokol"
+  },
+  {
+    "kecamatan": "Cikupa",
+    "samsat": "Balaraja"
+  },
+  {
+    "kecamatan": "Cilangkap",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Ciledug",
+    "samsat": "Ciledug"
+  },
+  {
+    "kecamatan": "Cilegon",
+    "samsat": "Cilegon"
+  },
+  {
+    "kecamatan": "Cileunyi",
+    "samsat": "Kab. Bandung"
+  },
+  {
+    "kecamatan": "Cianjur",
+    "samsat": "Cianjur"
+  },
+  {
+    "kecamatan": "Ciputat",
+    "samsat": "Ciputat"
+  },
+  {
+    "kecamatan": "Cilondong",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Cimanggis",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Cimpaeun",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Cinangka",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Cinere",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Cipayung",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Cipayung Jaya",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Cipondoh",
+    "samsat": "Ciledug"
+  },
+  {
+    "kecamatan": "Cisalak",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Cisalak Pasar",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Cisauk",
+    "samsat": "Kelapa Dua"
+  },
+  {
+    "kecamatan": "Cisoka",
+    "samsat": "Balaraja"
+  },
+  {
+    "kecamatan": "Citayam",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Curug",
+    "samsat": "Kelapa Dua"
+  },
+  {
+    "kecamatan": "Curug",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Curug",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Depok",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Depok Jaya",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Duren Mekar",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Duren Seribu",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Gandul",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Grogol",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Gunung Kaler",
+    "samsat": "Balaraja"
+  },
+  {
+    "kecamatan": "Harjamukti",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Jakarta",
+    "samsat": "Jakarta"
+  },
+  {
+    "kecamatan": "Jambe",
+    "samsat": "Balaraja"
+  },
+  {
+    "kecamatan": "Jati Uwung",
+    "samsat": "Cikokol"
+  },
+  {
+    "kecamatan": "Jatijajar",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Jatimulya",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Jayanti",
+    "samsat": "Balaraja"
+  },
+  {
+    "kecamatan": "Kab. Bogor",
+    "samsat": "Kab. Bogor"
+  },
+  {
+    "kecamatan": "Kalibaru",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Kalimulya",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Kab. Bandung Barat",
+    "samsat": "Kab. Bandung Barat"
+  },
+  {
+    "kecamatan": "Karang Tengah",
+    "samsat": "Ciledug"
+  },
+  {
+    "kecamatan": "Karawaci",
+    "samsat": "Cikokol"
+  },
+  {
+    "kecamatan": "Kedaung",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Kelapa Dua",
+    "samsat": "Kelapa Dua"
+  },
+  {
+    "kecamatan": "Kemiri",
+    "samsat": "Balaraja"
+  },
+  {
+    "kecamatan": "Kemiri Muka",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Kresek",
+    "samsat": "Balaraja"
+  },
+  {
+    "kecamatan": "Kronjo",
+    "samsat": "Balaraja"
+  },
+  {
+    "kecamatan": "Krukut",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Kukusan",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Larangan",
+    "samsat": "Ciledug"
+  },
+  {
+    "kecamatan": "Legok",
+    "samsat": "Kelapa Dua"
+  },
+  {
+    "kecamatan": "Lembang",
+    "samsat": "Kab. Bandung Barat"
+  },
+  {
+    "kecamatan": "Leuwinanggung",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Limo",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Mampang",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Mauk",
+    "samsat": "Balaraja"
+  },
+  {
+    "kecamatan": "Medan Satria",
+    "samsat": "Bekasi"
+  },
+  {
+    "kecamatan": "Mekar Baru",
+    "samsat": "Balaraja"
+  },
+  {
+    "kecamatan": "Mekarjaya",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Mekarsari",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Meruyung",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Muara Gembong",
+    "samsat": "Cikarang"
+  },
+  {
+    "kecamatan": "Mustikajaya",
+    "samsat": "Bekasi"
+  },
+  {
+    "kecamatan": "Neglasari",
+    "samsat": "Cikokol"
+  },
+  {
+    "kecamatan": "Pagedangan",
+    "samsat": "Kelapa Dua"
+  },
+  {
+    "kecamatan": "Pakuhaji",
+    "samsat": "Cikokol"
+  },
+  {
+    "kecamatan": "Pamulang",
+    "samsat": "Ciputat"
+  },
+  {
+    "kecamatan": "Pancoranmas",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Pandeglang",
+    "samsat": "Pandeglang"
+  },
+  {
+    "kecamatan": "Pangkalan Jati",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Pangkalan Jati Baru",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Panongan",
+    "samsat": "Balaraja"
+  },
+  {
+    "kecamatan": "Parongpong",
+    "samsat": "Kab. Bandung Barat"
+  },
+  {
+    "kecamatan": "Parung",
+    "samsat": "Kab. Bogor"
+  },
+  {
+    "kecamatan": "Pasar Kemis",
+    "samsat": "Balaraja"
+  },
+  {
+    "kecamatan": "Pasir GN Selatan",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Pasir Putih",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Pengasinan",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Periuk",
+    "samsat": "Cikokol"
+  },
+  {
+    "kecamatan": "Pinang",
+    "samsat": "Ciledug"
+  },
+  {
+    "kecamatan": "Pondok Aren",
+    "samsat": "Ciputat"
+  },
+  {
+    "kecamatan": "Pondok Cina",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Pondok Gede",
+    "samsat": "Bekasi"
+  },
+  {
+    "kecamatan": "Pondok Jaya",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Pondok Petir",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Rajeg",
+    "samsat": "Balaraja"
+  },
+  {
+    "kecamatan": "Rangkapan Jaya",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Rangkapan Jaya Baru",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Ratu Jaya",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Rawa Lumbu",
+    "samsat": "Bekasi"
+  },
+  {
+    "kecamatan": "Sawangan",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Sawangan Baru",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Sepatan",
+    "samsat": "Kelapa Dua"
+  },
+  {
+    "kecamatan": "Serang",
+    "samsat": "Serang"
+  },
+  {
+    "kecamatan": "Serpong",
+    "samsat": "BSD"
+  },
+  {
+    "kecamatan": "Serpong Utara",
+    "samsat": "BSD"
+  },
+  {
+    "kecamatan": "Serua",
+    "samsat": "Cinere"
+  },
+  {
+    "kecamatan": "Setu",
+    "samsat": "BSD"
+  },
+  {
+    "kecamatan": "Sindang Jaya",
+    "samsat": "Balaraja"
+  },
+  {
+    "kecamatan": "Solear",
+    "samsat": "Balaraja"
+  },
+  {
+    "kecamatan": "Sukadiri",
+    "samsat": "Balaraja"
+  },
+  {
+    "kecamatan": "Sukamaju",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Sukamaju Baru",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Sukamulya",
+    "samsat": "Balaraja"
+  },
+  {
+    "kecamatan": "Sukatani",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Sukmajaya",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Tajur Halang",
+    "samsat": "Kab. Bogor"
+  },
+  {
+    "kecamatan": "Tanah Baru",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Tangerang",
+    "samsat": "Cikokol"
+  },
+  {
+    "kecamatan": "Tapos",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Tarumajaya",
+    "samsat": "Cikarang"
+  },
+  {
+    "kecamatan": "Tegal",
+    "samsat": "Tegal"
+  },
+  {
+    "kecamatan": "Teluk Naga",
+    "samsat": "Kelapa Dua"
+  },
+  {
+    "kecamatan": "Tigaraksa",
+    "samsat": "Balaraja"
+  },
+  {
+    "kecamatan": "Tirtajaya",
+    "samsat": "Depok"
+  },
+  {
+    "kecamatan": "Tugu",
+    "samsat": "Depok"
+  }
+]

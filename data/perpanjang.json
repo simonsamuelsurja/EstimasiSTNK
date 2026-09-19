@@ -1,0 +1,257 @@
+[
+  {
+    "kendaraan": "Mobil",
+    "samsat": "Jakarta",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Mobil",
+    "samsat": "Serpong",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Mobil",
+    "samsat": "BSD",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Mobil",
+    "samsat": "Kelapa Dua",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Mobil",
+    "samsat": "Cikokol",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Mobil",
+    "samsat": "Ciledug",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Mobil",
+    "samsat": "Ciputat",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Mobil",
+    "samsat": "Bekasi",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Mobil",
+    "samsat": "Depok",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Mobil",
+    "samsat": "Cinere",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Mobil",
+    "samsat": "Cikarang",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Mobil",
+    "samsat": "Balaraja",
+    "harga": 700000
+  },
+  {
+    "kendaraan": "Mobil",
+    "samsat": "Bogor",
+    "harga": 700000
+  },
+  {
+    "kendaraan": "Mobil",
+    "samsat": "Serang",
+    "harga": 750000
+  },
+  {
+    "kendaraan": "Mobil",
+    "samsat": "Bandung",
+    "harga": 950000
+  },
+  {
+    "kendaraan": "Mobil",
+    "samsat": "Cianjur",
+    "harga": 950000
+  },
+  {
+    "kendaraan": "Mobil",
+    "samsat": "Kab. Bogor",
+    "harga": 700000
+  },
+  {
+    "kendaraan": "Motor",
+    "samsat": "Jakarta",
+    "harga": 150000
+  },
+  {
+    "kendaraan": "Motor",
+    "samsat": "Serpong",
+    "harga": 150000
+  },
+  {
+    "kendaraan": "Motor",
+    "samsat": "BSD",
+    "harga": 150000
+  },
+  {
+    "kendaraan": "Motor",
+    "samsat": "Kelapa Dua",
+    "harga": 150000
+  },
+  {
+    "kendaraan": "Motor",
+    "samsat": "Cikokol",
+    "harga": 150000
+  },
+  {
+    "kendaraan": "Motor",
+    "samsat": "Ciledug",
+    "harga": 150000
+  },
+  {
+    "kendaraan": "Motor",
+    "samsat": "Ciputat",
+    "harga": 150000
+  },
+  {
+    "kendaraan": "Motor",
+    "samsat": "Bekasi",
+    "harga": 150000
+  },
+  {
+    "kendaraan": "Motor",
+    "samsat": "Depok",
+    "harga": 150000
+  },
+  {
+    "kendaraan": "Motor",
+    "samsat": "Cinere",
+    "harga": 150000
+  },
+  {
+    "kendaraan": "Motor",
+    "samsat": "Cikarang",
+    "harga": 150000
+  },
+  {
+    "kendaraan": "Motor",
+    "samsat": "Balaraja",
+    "harga": 500000
+  },
+  {
+    "kendaraan": "Motor",
+    "samsat": "Bogor",
+    "harga": 500000
+  },
+  {
+    "kendaraan": "Motor",
+    "samsat": "Serang",
+    "harga": 500000
+  },
+  {
+    "kendaraan": "Motor",
+    "samsat": "Bandung",
+    "harga": 950000
+  },
+  {
+    "kendaraan": "Motor",
+    "samsat": "Cianjur",
+    "harga": 950000
+  },
+  {
+    "kendaraan": "Motor",
+    "samsat": "Kab. Bogor",
+    "harga": 500000
+  },
+  {
+    "kendaraan": "Pickup",
+    "samsat": "Jakarta",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Pickup",
+    "samsat": "Serpong",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Pickup",
+    "samsat": "BSD",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Pickup",
+    "samsat": "Kelapa Dua",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Pickup",
+    "samsat": "Cikokol",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Pickup",
+    "samsat": "Ciledug",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Pickup",
+    "samsat": "Ciputat",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Pickup",
+    "samsat": "Bekasi",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Pickup",
+    "samsat": "Depok",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Pickup",
+    "samsat": "Cinere",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Pickup",
+    "samsat": "Cikarang",
+    "harga": 200000
+  },
+  {
+    "kendaraan": "Pickup",
+    "samsat": "Balaraja",
+    "harga": 700000
+  },
+  {
+    "kendaraan": "Pickup",
+    "samsat": "Bogor",
+    "harga": 700000
+  },
+  {
+    "kendaraan": "Pickup",
+    "samsat": "Serang",
+    "harga": 750000
+  },
+  {
+    "kendaraan": "Pickup",
+    "samsat": "Bandung",
+    "harga": 950000
+  },
+  {
+    "kendaraan": "Pickup",
+    "samsat": "Cianjur",
+    "harga": 950000
+  },
+  {
+    "kendaraan": "Pickup",
+    "samsat": "Kab. Bogor",
+    "harga": 700000
+  }
+]

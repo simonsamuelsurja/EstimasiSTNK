@@ -1,0 +1,110 @@
+[
+  {
+    "samsat": "Jakarta",
+    "jabodetabek": true
+  },
+  {
+    "samsat": "Serpong",
+    "jabodetabek": true
+  },
+  {
+    "samsat": "BSD",
+    "jabodetabek": true
+  },
+  {
+    "samsat": "Kelapa Dua",
+    "jabodetabek": true
+  },
+  {
+    "samsat": "Cikokol",
+    "jabodetabek": true
+  },
+  {
+    "samsat": "Ciledug",
+    "jabodetabek": true
+  },
+  {
+    "samsat": "Ciputat",
+    "jabodetabek": true
+  },
+  {
+    "samsat": "Bekasi",
+    "jabodetabek": true
+  },
+  {
+    "samsat": "Depok",
+    "jabodetabek": true
+  },
+  {
+    "samsat": "Cinere",
+    "jabodetabek": true
+  },
+  {
+    "samsat": "Cikarang",
+    "jabodetabek": true
+  },
+  {
+    "samsat": "Bogor",
+    "jabodetabek": false
+  },
+  {
+    "samsat": "Balaraja",
+    "jabodetabek": false
+  },
+  {
+    "samsat": "Serang",
+    "jabodetabek": false
+  },
+  {
+    "samsat": "Banten",
+    "jabodetabek": false
+  },
+  {
+    "samsat": "Cilegon",
+    "jabodetabek": false
+  },
+  {
+    "samsat": "Cianjur",
+    "jabodetabek": false
+  },
+  {
+    "samsat": "Sukabumi",
+    "jabodetabek": false
+  },
+  {
+    "samsat": "Bandung",
+    "jabodetabek": false
+  },
+  {
+    "samsat": "Kerawang",
+    "jabodetabek": false
+  },
+  {
+    "samsat": "Cirebon",
+    "jabodetabek": false
+  },
+  {
+    "samsat": "Kab. Bogor",
+    "jabodetabek": false
+  },
+  {
+    "samsat": "Tegal",
+    "jabodetabek": false
+  },
+  {
+    "samsat": "Kab. Bandung",
+    "jabodetabek": false
+  },
+  {
+    "samsat": "Kab. Bandung Barat",
+    "jabodetabek": false
+  },
+  {
+    "samsat": "Cilegon",
+    "jabodetabek": false
+  },
+  {
+    "samsat": "Pandeglang",
+    "jabodetabek": false
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "asal": "Plat B",
+    "tujuan": "Palembang",
+    "jasa": 7000000,
+    "akomodasi": 6500000
+  },
+  {
+    "asal": "Plat B",
+    "tujuan": "Sleman",
+    "jasa": 7000000,
+    "akomodasi": 4000000
+  },
+  {
+    "asal": "Plat B",
+    "tujuan": "Indramayu",
+    "jasa": 7000000,
+    "akomodasi": 1500000
+  },
+  {
+    "asal": "Plat B",
+    "tujuan": "Padang",
+    "jasa": 7000000,
+    "akomodasi": 6000000
+  },
+  {
+    "asal": "Plat B",
+    "tujuan": "Medan",
+    "jasa": 7000000,
+    "akomodasi": 9000000
+  },
+  {
+    "asal": "Plat B",
+    "tujuan": "Palangkaraya",
+    "jasa": 7000000,
+    "akomodasi": 6300000
+  },
+  {
+    "asal": "Plat F",
+    "tujuan": "Batam",
+    "jasa": 7000000,
+    "akomodasi": 7000000
+  },
+  {
+    "asal": "Plat F",
+    "tujuan": "Cirebon",
+    "jasa": 7000000,
+    "akomodasi": 2000000
+  }
+]

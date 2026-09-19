@@ -1,0 +1,1226 @@
+[
+  {
+    "dari": "Jakarta",
+    "ke": "Jakarta",
+    "bbnMobil": 650000,
+    "bbnMotor": 500000,
+    "pindahMobil": 950000,
+    "pindahMotor": 700000
+  },
+  {
+    "dari": "Jakarta",
+    "ke": "Serpong",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Jakarta",
+    "ke": "BSD",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Jakarta",
+    "ke": "Kelapa Dua",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Jakarta",
+    "ke": "Cikokol",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Jakarta",
+    "ke": "Ciledug",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Jakarta",
+    "ke": "Ciputat",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Jakarta",
+    "ke": "Bekasi",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Jakarta",
+    "ke": "Depok",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Jakarta",
+    "ke": "Cinere",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Jakarta",
+    "ke": "Cikarang",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Jakarta",
+    "ke": "Balaraja",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Jakarta",
+    "ke": "Bogor",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Serpong",
+    "ke": "Serpong",
+    "bbnMobil": 650000,
+    "bbnMotor": 500000,
+    "pindahMobil": 950000,
+    "pindahMotor": 700000
+  },
+  {
+    "dari": "Serpong",
+    "ke": "BSD",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Serpong",
+    "ke": "Kelapa Dua",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Serpong",
+    "ke": "Cikokol",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Serpong",
+    "ke": "Ciledug",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Serpong",
+    "ke": "Ciputat",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Serpong",
+    "ke": "Bekasi",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Serpong",
+    "ke": "Depok",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Serpong",
+    "ke": "Cinere",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Serpong",
+    "ke": "Cikarang",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Serpong",
+    "ke": "Balaraja",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Serpong",
+    "ke": "Bogor",
+    "bbnMobil": 4250000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "BSD",
+    "ke": "BSD",
+    "bbnMobil": 650000,
+    "bbnMotor": 500000,
+    "pindahMobil": 950000,
+    "pindahMotor": 700000
+  },
+  {
+    "dari": "BSD",
+    "ke": "Kelapa Dua",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "BSD",
+    "ke": "Cikokol",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "BSD",
+    "ke": "Ciledug",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "BSD",
+    "ke": "Ciputat",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "BSD",
+    "ke": "Bekasi",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "BSD",
+    "ke": "Depok",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "BSD",
+    "ke": "Cinere",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "BSD",
+    "ke": "Cikarang",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "BSD",
+    "ke": "Balaraja",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "BSD",
+    "ke": "Bogor",
+    "bbnMobil": 4250000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Kelapa Dua",
+    "ke": "Kelapa Dua",
+    "bbnMobil": 650000,
+    "bbnMotor": 500000,
+    "pindahMobil": 950000,
+    "pindahMotor": 700000
+  },
+  {
+    "dari": "Kelapa Dua",
+    "ke": "Cikokol",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Kelapa Dua",
+    "ke": "Ciledug",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Kelapa Dua",
+    "ke": "Ciputat",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Kelapa Dua",
+    "ke": "Bekasi",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Kelapa Dua",
+    "ke": "Depok",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Kelapa Dua",
+    "ke": "Cinere",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Kelapa Dua",
+    "ke": "Cikarang",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Kelapa Dua",
+    "ke": "Balaraja",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Kelapa Dua",
+    "ke": "Bogor",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Cikokol",
+    "ke": "Cikokol",
+    "bbnMobil": 650000,
+    "bbnMotor": 500000,
+    "pindahMobil": 950000,
+    "pindahMotor": 700000
+  },
+  {
+    "dari": "Cikokol",
+    "ke": "Ciledug",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Cikokol",
+    "ke": "Ciputat",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Cikokol",
+    "ke": "Bekasi",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Cikokol",
+    "ke": "Depok",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Cikokol",
+    "ke": "Cinere",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Cikokol",
+    "ke": "Cikarang",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Cikokol",
+    "ke": "Balaraja",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Cikokol",
+    "ke": "Bogor",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Ciledug",
+    "ke": "Ciledug",
+    "bbnMobil": 650000,
+    "bbnMotor": 500000,
+    "pindahMobil": 950000,
+    "pindahMotor": 700000
+  },
+  {
+    "dari": "Ciledug",
+    "ke": "Ciputat",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Ciledug",
+    "ke": "Bekasi",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Ciledug",
+    "ke": "Depok",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Ciledug",
+    "ke": "Cinere",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Ciledug",
+    "ke": "Cikarang",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Ciledug",
+    "ke": "Balaraja",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Ciledug",
+    "ke": "Bogor",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Ciputat",
+    "ke": "Ciputat",
+    "bbnMobil": 650000,
+    "bbnMotor": 500000,
+    "pindahMobil": 950000,
+    "pindahMotor": 700000
+  },
+  {
+    "dari": "Ciputat",
+    "ke": "Bekasi",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Ciputat",
+    "ke": "Depok",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Ciputat",
+    "ke": "Cinere",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Ciputat",
+    "ke": "Cikarang",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Ciputat",
+    "ke": "Balaraja",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Ciputat",
+    "ke": "Bogor",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Bekasi",
+    "ke": "Bekasi",
+    "bbnMobil": 650000,
+    "bbnMotor": 500000,
+    "pindahMobil": 950000,
+    "pindahMotor": 700000
+  },
+  {
+    "dari": "Bekasi",
+    "ke": "Depok",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Bekasi",
+    "ke": "Cinere",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Bekasi",
+    "ke": "Cikarang",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Bekasi",
+    "ke": "Balaraja",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Bekasi",
+    "ke": "Bogor",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Depok",
+    "ke": "Depok",
+    "bbnMobil": 650000,
+    "bbnMotor": 500000,
+    "pindahMobil": 950000,
+    "pindahMotor": 700000
+  },
+  {
+    "dari": "Depok",
+    "ke": "Cinere",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Depok",
+    "ke": "Cikarang",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Depok",
+    "ke": "Balaraja",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Depok",
+    "ke": "Bogor",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Cinere",
+    "ke": "Cinere",
+    "bbnMobil": 650000,
+    "bbnMotor": 500000,
+    "pindahMobil": 950000,
+    "pindahMotor": 700000
+  },
+  {
+    "dari": "Cinere",
+    "ke": "Cikarang",
+    "bbnMobil": 1450000,
+    "bbnMotor": 1200000,
+    "pindahMobil": 1750000,
+    "pindahMotor": 1450000
+  },
+  {
+    "dari": "Cinere",
+    "ke": "Balaraja",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Cinere",
+    "ke": "Bogor",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Cikarang",
+    "ke": "Cikarang",
+    "bbnMobil": 650000,
+    "bbnMotor": 500000,
+    "pindahMobil": 950000,
+    "pindahMotor": 700000
+  },
+  {
+    "dari": "Cikarang",
+    "ke": "Balaraja",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Cikarang",
+    "ke": "Bogor",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Balaraja",
+    "ke": "Balaraja",
+    "bbnMobil": 2750000,
+    "bbnMotor": 2250000,
+    "pindahMobil": 2350000,
+    "pindahMotor": 1850000
+  },
+  {
+    "dari": "Balaraja",
+    "ke": "Bogor",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Bogor",
+    "ke": "Bogor",
+    "bbnMobil": 2750000,
+    "bbnMotor": 2250000,
+    "pindahMobil": 2350000,
+    "pindahMotor": 1850000
+  },
+  {
+    "dari": "Serang",
+    "ke": "Jakarta",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Serang",
+    "ke": "Serpong",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Serang",
+    "ke": "BSD",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Serang",
+    "ke": "Kelapa Dua",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Serang",
+    "ke": "Cikokol",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Serang",
+    "ke": "Ciledug",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Serang",
+    "ke": "Ciputat",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Serang",
+    "ke": "Bekasi",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Serang",
+    "ke": "Depok",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Serang",
+    "ke": "Cinere",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Serang",
+    "ke": "Cikarang",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Serang",
+    "ke": "Balaraja",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Serang",
+    "ke": "Bogor",
+    "bbnMobil": 4250000,
+    "bbnMotor": 3750000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Serang",
+    "ke": "Serang",
+    "bbnMobil": 2750000,
+    "bbnMotor": 2250000,
+    "pindahMobil": 2350000,
+    "pindahMotor": 1850000
+  },
+  {
+    "dari": "Bandung",
+    "ke": "Jakarta",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Bandung",
+    "ke": "Serpong",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Bandung",
+    "ke": "BSD",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Bandung",
+    "ke": "Kelapa Dua",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Bandung",
+    "ke": "Cikokol",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Bandung",
+    "ke": "Ciledug",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Bandung",
+    "ke": "Ciputat",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Bandung",
+    "ke": "Bekasi",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Bandung",
+    "ke": "Depok",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Bandung",
+    "ke": "Cinere",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Bandung",
+    "ke": "Cikarang",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Bandung",
+    "ke": "Balaraja",
+    "bbnMobil": 6250000,
+    "bbnMotor": 4750000,
+    "pindahMobil": 5850000,
+    "pindahMotor": 4350000
+  },
+  {
+    "dari": "Bandung",
+    "ke": "Bogor",
+    "bbnMobil": 6250000,
+    "bbnMotor": 4750000,
+    "pindahMobil": 5850000,
+    "pindahMotor": 4350000
+  },
+  {
+    "dari": "Bandung",
+    "ke": "Serang",
+    "bbnMobil": 6250000,
+    "bbnMotor": 4750000,
+    "pindahMobil": 5850000,
+    "pindahMotor": 4350000
+  },
+  {
+    "dari": "Bandung",
+    "ke": "Bandung",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3750000,
+    "pindahMotor": 3250000
+  },
+  {
+    "dari": "Cianjur",
+    "ke": "Jakarta",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Cianjur",
+    "ke": "Serpong",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Cianjur",
+    "ke": "BSD",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Cianjur",
+    "ke": "Kelapa Dua",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Cianjur",
+    "ke": "Cikokol",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Cianjur",
+    "ke": "Ciledug",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Cianjur",
+    "ke": "Ciputat",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Cianjur",
+    "ke": "Bekasi",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Cianjur",
+    "ke": "Depok",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Cianjur",
+    "ke": "Cinere",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Cianjur",
+    "ke": "Cikarang",
+    "bbnMobil": 5750000,
+    "bbnMotor": 4500000,
+    "pindahMobil": 5350000,
+    "pindahMotor": 4100000
+  },
+  {
+    "dari": "Cianjur",
+    "ke": "Balaraja",
+    "bbnMobil": 6250000,
+    "bbnMotor": 4750000,
+    "pindahMobil": 5850000,
+    "pindahMotor": 4350000
+  },
+  {
+    "dari": "Cianjur",
+    "ke": "Bogor",
+    "bbnMobil": 6250000,
+    "bbnMotor": 4750000,
+    "pindahMobil": 5850000,
+    "pindahMotor": 4350000
+  },
+  {
+    "dari": "Cianjur",
+    "ke": "Serang",
+    "bbnMobil": 6250000,
+    "bbnMotor": 4750000,
+    "pindahMobil": 5850000,
+    "pindahMotor": 4350000
+  },
+  {
+    "dari": "Cianjur",
+    "ke": "Bandung",
+    "bbnMobil": 6250000,
+    "bbnMotor": 4750000,
+    "pindahMobil": 5850000,
+    "pindahMotor": 4350000
+  },
+  {
+    "dari": "Cianjur",
+    "ke": "Cianjur",
+    "bbnMobil": 3750000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3750000,
+    "pindahMotor": 3250000
+  },
+  {
+    "dari": "Kab. Bogor",
+    "ke": "Jakarta",
+    "bbnMobil": 4000000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Kab. Bogor",
+    "ke": "Serpong",
+    "bbnMobil": 4000000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Kab. Bogor",
+    "ke": "BSD",
+    "bbnMobil": 4000000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Kab. Bogor",
+    "ke": "Kelapa Dua",
+    "bbnMobil": 4000000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Kab. Bogor",
+    "ke": "Cikokol",
+    "bbnMobil": 4000000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Kab. Bogor",
+    "ke": "Ciledug",
+    "bbnMobil": 4000000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Kab. Bogor",
+    "ke": "Ciputat",
+    "bbnMobil": 4000000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Kab. Bogor",
+    "ke": "Bekasi",
+    "bbnMobil": 4000000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Kab. Bogor",
+    "ke": "Depok",
+    "bbnMobil": 4000000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Kab. Bogor",
+    "ke": "Cinere",
+    "bbnMobil": 4000000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Kab. Bogor",
+    "ke": "Cikarang",
+    "bbnMobil": 4000000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Kab. Bogor",
+    "ke": "Balaraja",
+    "bbnMobil": 4250000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Kab. Bogor",
+    "ke": "Bogor",
+    "bbnMobil": 4250000,
+    "bbnMotor": 3250000,
+    "pindahMobil": 3350000,
+    "pindahMotor": 2850000
+  },
+  {
+    "dari": "Kab. Bogor",
+    "ke": "Serang",
+    "bbnMobil": 4250000,
+    "bbnMotor": 3750000,
+    "pindahMobil": 2350000,
+    "pindahMotor": 1850000
+  },
+  {
+    "dari": "Kab. Bogor",
+    "ke": "Bandung",
+    "bbnMobil": 6250000,
+    "bbnMotor": 4750000,
+    "pindahMobil": 5850000,
+    "pindahMotor": 4350000
+  },
+  {
+    "dari": "Kab. Bogor",
+    "ke": "Cianjur",
+    "bbnMobil": 6250000,
+    "bbnMotor": 4750000,
+    "pindahMobil": 5850000,
+    "pindahMotor": 4350000
+  },
+  {
+    "dari": "Kab. Bogor",
+    "ke": "Kab. Bogor",
+    "bbnMobil": 2750000,
+    "bbnMotor": 2250000,
+    "pindahMobil": 2350000,
+    "pindahMotor": 1850000
+  }
+]

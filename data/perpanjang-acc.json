@@ -1,0 +1,614 @@
+[
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": false,
+    "samsat": "Jakarta",
+    "harga": 1000000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": false,
+    "samsat": "Serpong",
+    "harga": 1150000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": false,
+    "samsat": "BSD",
+    "harga": 1150000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": false,
+    "samsat": "Kelapa Dua",
+    "harga": 1150000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": false,
+    "samsat": "Cikokol",
+    "harga": 1150000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": false,
+    "samsat": "Ciledug",
+    "harga": 1150000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": false,
+    "samsat": "Ciputat",
+    "harga": 1150000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": false,
+    "samsat": "Bekasi",
+    "harga": 1250000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": false,
+    "samsat": "Depok",
+    "harga": 1250000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": false,
+    "samsat": "Cinere",
+    "harga": 1250000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": false,
+    "samsat": "Cikarang",
+    "harga": 1250000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": false,
+    "samsat": "Balaraja",
+    "harga": 1250000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": false,
+    "samsat": "Bogor",
+    "harga": 1300000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": false,
+    "samsat": "Serang",
+    "harga": 1250000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": false,
+    "samsat": "Bandung",
+    "harga": 1850000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": false,
+    "samsat": "Cianjur",
+    "harga": 1850000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": false,
+    "samsat": "Kab. Bogor",
+    "harga": 1300000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": false,
+    "samsat": "Jakarta",
+    "harga": 700000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": false,
+    "samsat": "Serpong",
+    "harga": 800000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": false,
+    "samsat": "BSD",
+    "harga": 800000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": false,
+    "samsat": "Kelapa Dua",
+    "harga": 800000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": false,
+    "samsat": "Cikokol",
+    "harga": 800000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": false,
+    "samsat": "Ciledug",
+    "harga": 800000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": false,
+    "samsat": "Ciputat",
+    "harga": 950000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": false,
+    "samsat": "Bekasi",
+    "harga": 950000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": false,
+    "samsat": "Depok",
+    "harga": 950000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": false,
+    "samsat": "Cinere",
+    "harga": 950000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": false,
+    "samsat": "Cikarang",
+    "harga": 950000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": false,
+    "samsat": "Balaraja",
+    "harga": 1050000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": false,
+    "samsat": "Bogor",
+    "harga": 1050000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": false,
+    "samsat": "Serang",
+    "harga": 1050000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": false,
+    "samsat": "Bandung",
+    "harga": 1450000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": false,
+    "samsat": "Cianjur",
+    "harga": 1450000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": false,
+    "samsat": "Kab. Bogor",
+    "harga": 1050000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": true,
+    "samsat": "Jakarta",
+    "harga": 1150000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": true,
+    "samsat": "Serpong",
+    "harga": 1350000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": true,
+    "samsat": "BSD",
+    "harga": 1350000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": true,
+    "samsat": "Kelapa Dua",
+    "harga": 1350000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": true,
+    "samsat": "Cikokol",
+    "harga": 1350000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": true,
+    "samsat": "Ciledug",
+    "harga": 1350000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": true,
+    "samsat": "Ciputat",
+    "harga": 1450000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": true,
+    "samsat": "Bekasi",
+    "harga": 1450000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": true,
+    "samsat": "Depok",
+    "harga": 1450000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": true,
+    "samsat": "Cinere",
+    "harga": 1450000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": true,
+    "samsat": "Cikarang",
+    "harga": 1450000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": true,
+    "samsat": "Balaraja",
+    "harga": 1450000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": true,
+    "samsat": "Bogor",
+    "harga": 1600000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": true,
+    "samsat": "Serang",
+    "harga": 1600000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": true,
+    "samsat": "Bandung",
+    "harga": 2200000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": true,
+    "samsat": "Cianjur",
+    "harga": 2200000
+  },
+  {
+    "kendaraan": "Mobil",
+    "limaTahun": true,
+    "samsat": "Kab. Bogor",
+    "harga": 1600000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": true,
+    "samsat": "Jakarta",
+    "harga": 800000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": true,
+    "samsat": "Serpong",
+    "harga": 950000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": true,
+    "samsat": "BSD",
+    "harga": 950000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": true,
+    "samsat": "Kelapa Dua",
+    "harga": 950000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": true,
+    "samsat": "Cikokol",
+    "harga": 950000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": true,
+    "samsat": "Ciledug",
+    "harga": 950000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": true,
+    "samsat": "Ciputat",
+    "harga": 1100000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": true,
+    "samsat": "Bekasi",
+    "harga": 1100000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": true,
+    "samsat": "Depok",
+    "harga": 1100000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": true,
+    "samsat": "Cinere",
+    "harga": 1100000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": true,
+    "samsat": "Cikarang",
+    "harga": 1100000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": true,
+    "samsat": "Balaraja",
+    "harga": 1100000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": true,
+    "samsat": "Bogor",
+    "harga": 1100000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": true,
+    "samsat": "Serang",
+    "harga": 1100000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": true,
+    "samsat": "Bandung",
+    "harga": 1750000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": true,
+    "samsat": "Cianjur",
+    "harga": 1750000
+  },
+  {
+    "kendaraan": "Motor",
+    "limaTahun": true,
+    "samsat": "Kab. Bogor",
+    "harga": 1100000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": false,
+    "samsat": "Jakarta",
+    "harga": 1000000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": false,
+    "samsat": "Serpong",
+    "harga": 1150000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": false,
+    "samsat": "BSD",
+    "harga": 1150000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": false,
+    "samsat": "Kelapa Dua",
+    "harga": 1150000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": false,
+    "samsat": "Cikokol",
+    "harga": 1150000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": false,
+    "samsat": "Ciledug",
+    "harga": 1150000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": false,
+    "samsat": "Ciputat",
+    "harga": 1150000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": false,
+    "samsat": "Bekasi",
+    "harga": 1250000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": false,
+    "samsat": "Depok",
+    "harga": 1250000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": false,
+    "samsat": "Cinere",
+    "harga": 1250000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": false,
+    "samsat": "Cikarang",
+    "harga": 1250000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": false,
+    "samsat": "Balaraja",
+    "harga": 1250000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": false,
+    "samsat": "Bogor",
+    "harga": 1300000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": false,
+    "samsat": "Serang",
+    "harga": 1250000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": false,
+    "samsat": "Bandung",
+    "harga": 1850000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": false,
+    "samsat": "Cianjur",
+    "harga": 1850000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": false,
+    "samsat": "Kab. Bogor",
+    "harga": 1300000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": true,
+    "samsat": "Jakarta",
+    "harga": 1150000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": true,
+    "samsat": "Serpong",
+    "harga": 1350000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": true,
+    "samsat": "BSD",
+    "harga": 1350000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": true,
+    "samsat": "Kelapa Dua",
+    "harga": 1350000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": true,
+    "samsat": "Cikokol",
+    "harga": 1350000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": true,
+    "samsat": "Ciledug",
+    "harga": 1350000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": true,
+    "samsat": "Ciputat",
+    "harga": 1450000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": true,
+    "samsat": "Bekasi",
+    "harga": 1450000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": true,
+    "samsat": "Depok",
+    "harga": 1450000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": true,
+    "samsat": "Cinere",
+    "harga": 1450000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": true,
+    "samsat": "Cikarang",
+    "harga": 1450000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": true,
+    "samsat": "Balaraja",
+    "harga": 1450000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": true,
+    "samsat": "Bogor",
+    "harga": 1500000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": true,
+    "samsat": "Serang",
+    "harga": 1450000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": true,
+    "samsat": "Bandung",
+    "harga": 2200000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": true,
+    "samsat": "Cianjur",
+    "harga": 2200000
+  },
+  {
+    "kendaraan": "Pickup",
+    "limaTahun": true,
+    "samsat": "Kab. Bogor",
+    "harga": 1500000
+  }
+]
