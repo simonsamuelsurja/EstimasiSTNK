@@ -134,8 +134,16 @@ Kalibrasi P(ARA dalam 10 bar ≈ 2 pekan) untuk N skor tertinggi:
 ```bash
 git clone --depth 1 https://github.com/nofendian17/idx_dataset /tmp/idx_dataset
 pip install pandas numpy pyarrow
+# konfigurasi v1 (baseline, hanya peringkat skor)
 python analisis-ara/screener_ara.py --data /tmp/idx_dataset/data --top 15
+
+# konfigurasi v2 (final) - syarat pernah ARA 60h, plus status gerbang rezim pasar
+python analisis-ara/screener_ara.py --data /tmp/idx_dataset/data --top 3 --require-ara60
 ```
+
+Output v2 mencantumkan status rezim pasar. Bila bertuliskan MENAHAN, konfigurasi
+final tidak entry sama sekali hari itu - daftarnya tetap ditampilkan sebagai
+peringkat, bukan sebagai sinyal beli.
 
 
 ---

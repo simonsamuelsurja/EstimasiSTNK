@@ -73,6 +73,9 @@ def score(panel):
         "volsurge": val / val.rolling(20).median().shift(1),
     }
     liq = val.rolling(20).median().shift(1)
+    # Rezim pasar: return 20 hari value-weighted, trailing (tanpa lookahead).
+    mkt = (r * val.shift(1)).sum(axis=1) / val.shift(1).sum(axis=1)
+    mkt20 = (1 + mkt).rolling(20).apply(np.prod, raw=True) - 1
     # Harga di bawah Rp50 adalah papan pemantauan khusus: tick kasar bikin
     # persentase meledak tanpa ada ARA sungguhan.
     elig = traded & (px >= 50) & adj.shift(MIN_HISTORY).notna() & (liq > 0)
@@ -80,7 +83,8 @@ def score(panel):
     rank = lambda m: m.where(elig).rank(axis=1, pct=True)
     s = (rank(f["vol20"]) + rank(f["off_lo60"]) + rank(f["mom20"])
          + rank(np.log1p(f["volsurge"].clip(0, 200)))) / 4
-    return s.where(elig), f, liq, px, p("ara").fillna(False).astype(bool)
+    ara = p("ara").fillna(False).astype(bool)
+    return s.where(elig), f, liq, px, ara, mkt20
 
 
 def main():
@@ -90,13 +94,19 @@ def main():
     ap.add_argument("--min-liq", type=float, default=0,
                     help="filter likuiditas, rupiah/hari (mis. 1e9)")
     ap.add_argument("--date", help="tanggal screening (default: bar terakhir)")
+    ap.add_argument("--require-ara60", action="store_true",
+                    help="konfigurasi v2: hanya emiten yang pernah ARA dalam 60 hari")
     a = ap.parse_args()
 
     panel = build_panel(load(a.data))
-    s, f, liq, px, ara = score(panel)
+    s, f, liq, px, ara, mkt20 = score(panel)
 
     i = s.index.get_loc(pd.Timestamp(a.date)) if a.date else len(s.index) - 1
     d = s.index[i]
+
+    ara60 = ara.rolling(60).sum()
+    if a.require_ara60:
+        s = s.where(ara60 >= 1)
 
     out = pd.DataFrame({
         "skor": s.iloc[i], "harga": px.iloc[i], "vol20": f["vol20"].iloc[i],
@@ -111,12 +121,18 @@ def main():
     out["likuid_jt"] = (out.pop("likuid") / 1e6).round(0)
     out["volsurge"] = out["volsurge"].round(1)
 
+    m = mkt20.iloc[i]
+    gate = "BOLEH ENTRY" if m > 0 else "MENAHAN - konfigurasi v2 tidak entry"
     print(f"\nScreen ARA per {d.date()} ({d.day_name()})  "
-          f"— {len(s.iloc[i].dropna())} emiten layak skor\n")
+          f"— {len(s.iloc[i].dropna())} emiten lolos saringan")
+    print(f"Rezim pasar (return 20 hari trailing): {m * 100:+.2f}%  ->  {gate}\n")
     print(out.to_string())
-    print("\nSkor memprediksi peluang ARA, BUKAN peluang untung.")
-    print("Kalibrasi historis: top-10 -> ~20% kena ARA dalam 2 pekan (~10% bila "
-          "disaring likuiditas >=Rp1 miliar/hari). Sisanya tidak.")
+    print("\nSkor memeringkat peluang ARA, bukan peluang untung; keduanya diukur "
+          "terpisah di README.")
+    print("Kalibrasi v2 (top3 + syarat ARA-60h): hit rate 19-36% kena ARA dalam "
+          "2 pekan. Sisanya tidak.")
+    print("Aturan keluar: jual di open sehari setelah ARA; bila 10 bar tanpa ARA, "
+          "tutup apa adanya; TANPA stop loss (terbukti merusak).")
 
 
 if __name__ == "__main__":
