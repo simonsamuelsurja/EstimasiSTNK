@@ -1,214 +1,259 @@
-# Rencana Pembangunan Aplikasi Estimasi STNK
+# Strategi Pembangunan Aplikasi Estimasi STNK
 
-Dokumen ini menjawab satu pertanyaan: **seberapa lama sampai aplikasi ini bisa dipakai?**
+Aplikasi **web-based**, dipakai **internal** Surya Jasa, berfungsi sebagai kalkulator estimasi
+biaya pengurusan dokumen kendaraan. Harus jalan baik di HP maupun di komputer.
 
-Sumber: `Surya Jasa - Estimasi v2.xlsx` (5 sheet, sudah dibedah penuh).
-Target: aplikasi **Android**, pemakaian **internal**, **tarif bisa diedit admin** tanpa ngoding.
+Sumber logika: `Surya Jasa - Estimasi v2.xlsx` (5 sheet, sudah dibedah penuh).
+
+> Dokumen ini adalah rencana, belum ada kode yang ditulis.
 
 ---
 
-## Jawaban singkat
+## Jawaban singkat: kapan jadi?
 
 | Milestone | Isi | Perkiraan |
 |---|---|---|
-| **M1 — Data & logika beres** | Semua tabel harga terekstrak, semua rumus terterjemahkan, mesin hitung lulus uji terhadap Excel | **±1 minggu** |
-| **M2 — Kalkulator jalan di HP** | Bisa input kendaraan, keluar estimasi, hasilnya sama persis dengan Excel | **±2–3 minggu** |
-| **M3 — Siap dipakai tim** | Halaman admin tarif, override manual, kirim estimasi ke klien | **±4–6 minggu** |
+| **M1 — Otak kalkulator beres** | Data daerah/Samsat/tarif terekstrak, seluruh rumus diterjemahkan, mesin hitung lulus uji terhadap Excel | **±1 minggu** |
+| **M2 — Bisa dipakai membuat estimasi** | Kalkulator jalan di HP & komputer, mode manual, output tersimpan sebagai gambar | **±2 minggu** |
+| **M3 — Lepas dari ketergantungan** | Halaman admin tarif, terpasang di HP tim, uji paralel dengan Excel | **±3 minggu** |
 
-Angka ini mengasumsikan kita bekerja rutin dan pertanyaan terbuka dijawab dalam 1–2 hari.
-Penyebab geser paling besar bukan koding — lihat bagian [Risiko](#risiko-yang-bisa-menggeser-jadwal).
+Lebih cepat dari rencana Android sebelumnya (4–6 minggu) karena satu sebab:
+**seluruh aplikasi bisa aku bangun dan uji sendiri sampai selesai.** Tidak ada lagi putaran
+"aku tulis → kamu kompilasi → error dilaporkan → aku perbaiki" yang memakan waktu di jalur Android.
 
 ---
 
-## Batasan environment (memengaruhi jadwal)
+## Lingkup yang sudah ditetapkan
 
-Sesi Claude Code ini jalan di container dengan network policy terbatas. Hasil pengecekan:
-
-| Host | Status | Dampak |
+| # | Kebutuhan | Bentuknya di aplikasi |
 |---|---|---|
-| `dl.google.com` | **Diblokir** (403) | Android SDK tidak bisa diunduh; repo Maven `google()` untuk AndroidX/Compose tidak terjangkau |
-| `expo.dev`, `api.expo.dev` | **Diblokir** (403) | Jalur Expo/EAS tertutup |
-| `repo.maven.apache.org` | OK | Modul Kotlin murni bisa dibangun & diuji di sini |
-| `services.gradle.org`, `registry.npmjs.org` | OK | Gradle & npm berfungsi |
-| JDK 21, Gradle 8.14.3, Node 22, Python 3.11 | Terpasang | — |
+| 1 | Kalkulator sebagai fungsi utama, dengan database daerah & Samsat | Input kendaraan → hitung **jasa**, **estimasi denda STNK**, dan **biaya-biaya lain**, ditampilkan terpisah agar terbaca |
+| 2 | Fitur manual | Setiap baris biaya bisa ditimpa angkanya sesuai kebutuhan klien, menggantikan fungsi sheet `Hitung Manual` |
+| 3 | Internal, tanpa login | Kalkulator langsung terbuka, tanpa akun, tanpa kata sandi |
+| 4 | Output bisa disimpan sebagai gambar | Kartu estimasi rapi, sekali ketuk tersimpan sebagai gambar untuk dikirim ke klien |
 
-**Konsekuensi:** kode Android (UI) harus dikompilasi di Android Studio di komputer Simon.
-Setiap iterasi UI jadi dua langkah: Claude menulis → Simon kompilasi → error dilaporkan → Claude perbaiki.
+**Satu asumsi yang aku ambil:** "versi mobile juga harus dibuat" aku artikan sebagai **satu aplikasi web yang
+tata letaknya menyesuaikan layar** — dirancang mobile-first, tetap rapi di layar besar, dan bisa dipasang
+di layar utama HP seperti aplikasi biasa (PWA). Bukan dua aplikasi terpisah yang harus dirawat dua kali.
+Kalau maksudmu berbeda, beri tahu sebelum Fase 3 — setelah itu biayanya mahal untuk diubah.
 
-**Mitigasi arsitektur:** proyek dipecah dua modul —
+---
 
-- `:core` — Kotlin/JVM murni, tanpa dependensi Android. Semua rumus dan tarif ada di sini.
-  **Bisa dibangun dan diuji penuh di container ini.** Ini bagian yang paling rawan salah, jadi justru bagian inilah yang harus bisa diuji otomatis.
-- `:app` — UI Android (Compose), tipis, hanya menampilkan hasil dari `:core`.
-  Dikompilasi di Android Studio.
+## Strategi arsitektur
 
-> Kelayakan pemisahan ini perlu dibuktikan di awal Fase 2 (±30 menit). Kalau ternyata gagal,
-> seluruh verifikasi pindah ke komputer Simon dan **timeline M2 & M3 mundur ±1 minggu.**
+Tiga lapisan, dipisah dengan sengaja:
 
-Alternatif yang menghapus batasan ini sepenuhnya: membangunnya sebagai **web app yang dipasang di layar utama HP (PWA)**.
-Bisa dibangun *dan* diuji end-to-end di sini, tanpa Android Studio, tanpa putaran bolak-balik — perkiraan M3 turun ke **±2–3 minggu**.
-Simon sudah memilih Android; opsi ini dicatat sebagai bahan pertimbangan, bukan untuk mengubah keputusan.
+```
+┌─────────────────────────────────────────────┐
+│  TAMPILAN                                   │
+│  Kalkulator · Mode manual · Kartu estimasi  │  ← berubah sering
+│  Mobile-first, responsif, bisa dipasang     │
+├─────────────────────────────────────────────┤
+│  MESIN HITUNG                               │
+│  Semua rumus. Tanpa tampilan.               │  ← jarang berubah, WAJIB benar
+│  Diuji otomatis terhadap angka Excel        │
+├─────────────────────────────────────────────┤
+│  DATA                                       │
+│  Daerah · Samsat · Tarif · Tabel harga      │  ← berubah lewat halaman admin
+└─────────────────────────────────────────────┘
+```
+
+**Kenapa dipisah begini:** mesin hitung adalah satu-satunya bagian yang kalau salah, kamu rugi uang.
+Dengan dipisahkan dari tampilan, dia bisa diuji otomatis terhadap ratusan kasus tanpa membuka browser.
+Setiap kali ada perubahan tampilan, uji itu jalan lagi dan memastikan angkanya tidak bergeser.
+
+**Tarif tidak ditanam di kode.** 30 tarif yang di Excel tertanam di dalam rumus akan diangkat
+jadi baris data. Konsekuensinya: naik tarif cek fisik cukup diubah di halaman admin, tanpa menungguku.
+
+---
+
+## Tantangan yang perlu keputusanmu: admin tarif tanpa login
+
+Ini bukan detail teknis, ini keputusan bisnis, dan aku angkat sekarang karena memengaruhi Fase 6.
+
+Kamu minta tanpa login. Untuk kalkulator sehari-hari itu masuk akal — staf tinggal buka dan pakai.
+Tapi halaman admin tarif berbeda sifatnya: **siapa pun yang tahu alamatnya bisa mengubah harga jasamu.**
+Kalau aplikasi di-hosting di internet dengan alamat publik, "tanpa login" berarti tarifmu bisa diubah siapa saja
+yang menemukan alamat itu — termasuk kompetitor yang penasaran, atau orang iseng.
+
+Tiga pilihan, dari paling aman:
+
+| Pilihan | Cara kerja | Konsekuensi |
+|---|---|---|
+| **A. Jaringan kantor saja** | Aplikasi hanya bisa dibuka dari WiFi kantor | Paling aman. Tapi tidak bisa dipakai saat staf di lapangan atau ketemu klien di luar |
+| **B. Kalkulator terbuka, admin pakai PIN** ★ | Kalkulator tanpa login sama sekali. Halaman admin minta satu PIN yang diketahui kamu saja | Sesuai permintaanmu untuk pemakaian harian, tarif tetap terlindungi. **Rekomendasiku** |
+| **C. Benar-benar terbuka** | Tidak ada perlindungan apa pun | Hanya layak kalau aplikasi tidak pernah menyentuh internet publik |
+
+Pilihan B tidak melanggar "tanpa login" dalam arti yang kamu maksud — staf tidak perlu punya akun,
+tidak perlu ingat kata sandi, tinggal buka dan pakai. PIN hanya berdiri di depan satu halaman: pengubah tarif.
+
+Kalau kamu tetap mau C, aku kerjakan C — tapi ini perlu keputusan sadar, bukan kelalaian.
 
 ---
 
 ## Tahapan
 
-### Fase 0 — Ekstraksi & pembersihan data
+### Fase 0 — Ekstraksi data & tarif
 
-Memindahkan semua data referensi dari Excel ke format terstruktur yang bisa dibaca aplikasi.
+Memindahkan seluruh data referensi Excel ke format terstruktur.
 
-Isi:
 - 140 kecamatan → Samsat
-- 27 Samsat → flag Jabodetabek
-- ±150 pasangan rute (Dari → Ke) × 4 kolom harga (Balik Nama Mobil/Motor, Pindah Alamat Mobil/Motor)
-- Tabel Perpanjang Tahunan (Kendaraan × Samsat)
-- Tabel Perpanjang ACC KTP (Kendaraan × 5 Tahun × Samsat)
-- **Mengangkat 30 tarif yang selama ini tertanam di dalam rumus** menjadi baris tabel tarif
+- 27 Samsat → penanda Jabodetabek
+- ±150 pasangan rute (Dari → Ke) × 4 kolom harga
+- Tabel Perpanjang Tahunan dan Perpanjang ACC KTP
+- **Mengangkat 30 tarif yang tertanam di dalam rumus** menjadi baris tabel tarif
 
-Keluaran: berkas data terstruktur + daftar 30 tarif untuk dikonfirmasi Simon.
+Keluaran: berkas data + daftar 30 tarif untuk kamu konfirmasi.
 
-| | |
-|---|---|
-| Kerja Claude | 2–3 jam |
-| Butuh dari Simon | Verifikasi 30 tarif masih berlaku (±1–2 jam) |
-| Bisa diverifikasi di sini | Ya, penuh |
+| Kerja Claude | Butuh darimu | Bisa kuuji sendiri |
+|---|---|---|
+| 2–3 jam | Verifikasi 30 tarif (±1–2 jam) | Ya |
 
 ---
 
 ### Fase 1 — Spesifikasi logika hitung
 
 Menerjemahkan 22 rumus keluaran + 17 rumus helper menjadi aturan yang tidak ambigu.
-Ini fase yang menentukan benar-salahnya seluruh aplikasi.
+**Fase paling menentukan benar-salahnya seluruh aplikasi.**
 
-Isi:
-- Aturan per jenis jasa (8 jenis: BBN, Mutasi, Perpanjang, Perpanjang ACC KTP, Pindah Alamat, STNK Hilang, Revisi Nopol Ganti Buku, Revisi Nopol Tidak Ganti Buku)
-- 5 kelompok subtotal dan isinya
-- Tabel keputusan untuk rumus bercabang dalam (`B38 Biaya Penulisan` punya 17 `IF` bersarang)
-- Penyelesaian semua [pertanyaan terbuka](#pertanyaan-terbuka)
+- Aturan per jenis jasa (8 jenis)
+- Pemisahan tiga kelompok yang kamu sebut: **jasa**, **denda STNK**, **biaya lain**
+- Tabel keputusan untuk rumus bercabang dalam (`Biaya Penulisan` punya 17 `IF` bersarang)
+- Penyelesaian [pertanyaan terbuka](#pertanyaan-terbuka)
 
-Keluaran: dokumen spesifikasi yang bisa dibaca orang non-teknis dan dipakai sebagai rujukan saat ada sengketa angka.
+Keluaran: dokumen rujukan berbahasa manusia — dipakai kalau suatu hari ada sengketa angka dengan klien.
 
-| | |
-|---|---|
-| Kerja Claude | 3–4 jam |
-| Butuh dari Simon | Menjawab 12 pertanyaan terbuka — **ini penentu jadwal** |
-| Bisa diverifikasi di sini | Ya |
+| Kerja Claude | Butuh darimu | Bisa kuuji sendiri |
+|---|---|---|
+| 3–4 jam | **Menjawab pertanyaan terbuka — ini penentu jadwal** | Ya |
 
 ---
 
-### Fase 2 — Mesin hitung + pengujian
+### Fase 2 — Mesin hitung + uji regresi
 
-Menulis modul `:core` dan mengujinya terhadap Excel.
+Menulis lapisan mesin hitung dan mengujinya terhadap Excel.
 
-Isi:
-- Implementasi seluruh aturan Fase 1 dalam Kotlin murni
-- Tabel tarif dimuat dari data, bukan ditanam di kode
-- **Uji regresi**: setiap kasus diuji terhadap angka yang sudah ada di Excel — hasil aplikasi wajib sama persis
-- Kasus awal: 3 sheet kalkulator yang ada (Mutasi Cianjur→Jakarta 21.108.000, Perpanjang ACC KTP, STNK Hilang) + kasus tambahan per jenis jasa
+- Implementasi seluruh aturan Fase 1
+- Tarif dimuat dari data, tidak ditanam di kode
+- **Uji regresi**: hasil aplikasi wajib sama persis dengan angka Excel
+- Kasus awal dari Excel: Mutasi Cianjur→Jakarta **21.108.000**, Perpanjang ACC KTP, STNK Hilang
+- Ditambah kasus untuk setiap jenis jasa yang belum tercakup
 
-| | |
-|---|---|
-| Kerja Claude | 6–8 jam |
-| Butuh dari Simon | 3–5 contoh estimasi nyata beserta hasil yang benar, untuk jenis jasa yang belum tercakup |
-| Bisa diverifikasi di sini | Ya — ini alasan `:core` dipisah |
+| Kerja Claude | Butuh darimu | Bisa kuuji sendiri |
+|---|---|---|
+| 6–8 jam | 3–5 contoh estimasi nyata beserta hasil yang benar | Ya, penuh |
 
-**Fase ini adalah pelindung utama proyek.** Kalau mesin hitungnya benar dan teruji, sisanya hanya tampilan.
+**Fase ini adalah pelindung utama proyek.** Kalau mesin hitung benar dan teruji, sisanya tinggal tampilan.
 
 ---
 
-### Fase 3 — Aplikasi Android: input & hasil
+### Fase 3 — Kalkulator (mobile-first)
 
-UI untuk membuat estimasi.
+Tampilan utama yang dipakai sehari-hari.
 
-Isi:
-- Form input dengan field yang muncul/hilang sesuai jenis jasa yang dipilih
-- Pencarian kecamatan (140 baris — tidak boleh dropdown polos)
-- Tanggal STNK sebagai pemilih tanggal, bulan keterlambatan **dihitung otomatis**
-- Tampilan hasil: 5 kelompok subtotal + total estimasi
-- Database lokal (Room) berisi data Fase 0
+- Form input yang **field-nya muncul dan hilang** sesuai jenis jasa — tidak semua 20 field ditampilkan sekaligus
+- Pencarian kecamatan dengan ketik-dan-saring (140 baris terlalu banyak untuk dropdown biasa)
+- Tanggal STNK sebagai pemilih tanggal; **bulan keterlambatan dihitung otomatis**, tidak lagi diketik manual
+- Hasil dipecah tiga sesuai permintaanmu: **Jasa** · **Denda STNK** · **Biaya lain** · lalu Total
+- Dirancang untuk dipakai satu tangan sambil berdiri
 
-| | |
-|---|---|
-| Kerja Claude | 8–12 jam |
-| Butuh dari Simon | 2–4 putaran kompilasi di Android Studio + masukan tampilan |
-| Bisa diverifikasi di sini | **Tidak** — harus dikompilasi Simon |
+| Kerja Claude | Butuh darimu | Bisa kuuji sendiri |
+|---|---|---|
+| 8–10 jam | Masukan tampilan setelah melihat versi pertama | Ya — termasuk tangkapan layar di ukuran HP |
 
 ---
 
-### Fase 4 — Halaman admin tarif
+### Fase 4 — Mode manual
 
-Yang membuat aplikasi ini tidak bergantung pada Claude untuk setiap perubahan harga.
+Pengganti sheet `Hitung Manual`.
 
-Isi:
+- Setiap baris biaya bisa ditimpa angkanya
+- Baris yang ditimpa **ditandai jelas di layar** supaya staf tahu ini bukan angka hitungan
+- Angka asli hasil hitungan tetap disimpan, agar bisa dikembalikan
+- Penandaan ini **tidak ikut muncul** di gambar yang dikirim ke klien
+
+| Kerja Claude | Butuh darimu | Bisa kuuji sendiri |
+|---|---|---|
+| 3–4 jam | Konfirmasi baris mana saja yang boleh ditimpa | Ya |
+
+---
+
+### Fase 5 — Kartu estimasi & simpan sebagai gambar
+
+Ini yang sampai ke tangan klien, jadi diperlakukan sebagai hasil kerja tersendiri, bukan tempelan.
+
+- Tata letak kartu khusus untuk gambar — bukan sekadar memotret layar kalkulator
+- Ukuran dioptimalkan untuk WhatsApp
+- Berisi nopol, tanggal STNK, jenis jasa, rincian, total
+- Sekali ketuk: tersimpan ke galeri HP
+- **Jalur cadangan untuk iPhone**: Safari sering menolak unduhan otomatis, jadi gambar ditampilkan agar bisa ditekan-tahan lalu disimpan
+
+Risiko teknis yang sudah aku perhitungkan: pembuatan gambar dari halaman web punya jebakan pada
+huruf dan tata letak — hasilnya bisa berbeda antar HP. Karena itu fase ini diberi jatah waktu lebih longgar
+dan diuji di beberapa ukuran layar, bukan satu.
+
+| Kerja Claude | Butuh darimu | Bisa kuuji sendiri |
+|---|---|---|
+| 4–6 jam | Contoh format penawaran yang biasa kamu kirim ke klien | Sebagian besar ya |
+
+---
+
+### Fase 6 — Halaman admin tarif
+
+Yang membuat kamu tidak perlu memanggilku setiap kali harga berubah.
+
 - Ubah 30 tarif dasar
 - Kelola tabel harga rute, Samsat, kecamatan
-- **Mode override manual** — setiap baris estimasi bisa ditimpa sesuai kebutuhan klien, menggantikan fungsi sheet `Hitung Manual`
 - Impor/ekspor untuk pembaruan massal
-- Riwayat perubahan tarif (siapa mengubah apa, kapan)
+- Riwayat perubahan: apa yang diubah, kapan
+- Perlindungan sesuai [keputusanmu di atas](#tantangan-yang-perlu-keputusanmu-admin-tarif-tanpa-login)
 
-| | |
-|---|---|
-| Kerja Claude | 6–8 jam |
-| Butuh dari Simon | Putaran kompilasi + keputusan siapa yang berhak jadi admin |
-| Bisa diverifikasi di sini | Sebagian (logikanya ya, UI tidak) |
-
----
-
-### Fase 5 — Keluaran untuk klien
-
-Sesuai fungsi `B4` di Excel sekarang: data untuk disalin dan dikirim ke klien.
-
-Isi:
-- Format estimasi yang rapi (nopol, tanggal STNK, rincian, total)
-- Bagikan sebagai teks WhatsApp / PDF
-- Simpan riwayat estimasi
-
-| | |
-|---|---|
-| Kerja Claude | 2–3 jam |
-| Butuh dari Simon | Contoh format penawaran yang biasa dikirim ke klien |
+| Kerja Claude | Butuh darimu | Bisa kuuji sendiri |
+|---|---|---|
+| 6–8 jam | Keputusan A / B / C soal perlindungan admin | Ya |
 
 ---
 
-### Fase 6 — Uji lapangan & rilis
+### Fase 7 — Pemasangan & uji paralel
 
-Isi:
-- Build APK di Android Studio
-- Uji paralel: setiap estimasi dikerjakan di aplikasi **dan** di Excel selama 1–2 minggu, selisih apa pun ditelusuri
-- Pasang di HP tim
+- Dipasang agar bisa dibuka dari HP tim seperti aplikasi biasa
+- Tetap bisa dipakai saat sinyal buruk
+- **Uji paralel**: selama 1–2 minggu setiap estimasi dikerjakan di aplikasi **dan** di Excel, setiap selisih ditelusuri
 
-| | |
-|---|---|
-| Kerja Claude | Perbaikan sesuai temuan |
-| Butuh dari Simon | **Ini fase milik Simon** — 1–2 minggu pemakaian nyata |
+| Kerja Claude | Butuh darimu | Bisa kuuji sendiri |
+|---|---|---|
+| 3–4 jam + perbaikan temuan | **Fase milikmu** — 1–2 minggu pemakaian nyata | Sebagian |
 
 Uji paralel tidak boleh dilewati. Aplikasi ini menghasilkan angka yang ditagihkan ke klien;
-salah satu tarif saja bisa berarti kerugian atau penawaran yang tidak masuk akal.
+satu tarif salah bisa berarti rugi, atau penawaran yang membuat klien lari.
 
 ---
 
 ## Pertanyaan terbuka
 
-Harus dijawab di Fase 1. Tanpa ini, mesin hitung tidak bisa ditulis dengan benar.
+Harus dijawab di Fase 1. Tanpa ini mesin hitung tidak bisa ditulis dengan benar.
 
 | # | Pertanyaan | Kenapa penting |
 |---|---|---|
 | 1 | Bulan keterlambatan dihitung **bulan penuh** atau **bulan berjalan** (lewat 1 hari = 1 bulan)? | Menentukan `SKP` dan `JR`; selisihnya bisa jutaan |
-| 2 | `Kertas Gesek` sekarang membaca *nilai* `Cek Fisik` (`if(H14=450000,45000,...)`). Aturan sebenarnya apa? | Begitu tarif cek fisik naik, kertas gesek diam-diam jadi 0 |
+| 2 | `Kertas Gesek` sekarang membaca *nilai* `Cek Fisik` (`if(H14=450000,45000,...)`). Aturan sebenarnya apa? | Begitu tarif cek fisik naik, kertas gesek diam-diam jadi nol |
 | 3 | Apakah 30 tarif yang tertanam di rumus masih berlaku semua? | Sumber kebenaran tarif |
-| 4 | `Jasa Jauh` di-hardcode 7 juta, sementara tabel `K3:N11` punya rincian per tujuan. Mana yang benar? | Menentukan apakah tabel itu jadi lookup resmi |
-| 5 | Daftar pilihan `Request Nopol` sudah lengkap? (3/2/1 Angka Ada Huruf, Ganjil/Genap) | Kelengkapan dropdown |
+| 4 | `Jasa Jauh` di-hardcode 7 juta, sementara tabel `K3:N11` punya rincian per tujuan. Mana yang benar? | Menentukan apakah tabel itu jadi acuan resmi |
+| 5 | Daftar pilihan `Request Nopol` sudah lengkap? | Kelengkapan pilihan |
 | 6 | Plat selain B, A, F, D perlu didukung? | Sekarang plat tak dikenal menghasilkan teks `"MANUAL"` |
 | 7 | `Pickup` dihargai sama dengan `Mobil` untuk lookup, tapi `JR` ditambah 72.000. Benar? | Perlakuan jenis kendaraan |
 | 8 | Perilaku pilihan `"Lainnya"` di daftar kecamatan? | Penanganan daerah di luar daftar |
-| 9 | Angka `48%` di `SKP 1 BULAN` itu denda apa, dan apakah bisa berubah? | Kalau bisa berubah, harus masuk tabel tarif |
-| 10 | Baris mana saja yang boleh ditimpa manual di mode override? | Menentukan desain Fase 4 |
-| 11 | Estimasi perlu disimpan jadi riwayat, atau sekali pakai? | Menentukan skema database |
-| 12 | Berapa orang yang akan pakai, dan apakah tarif harus tersinkron antar HP? | **Penentu besar**: kalau harus sinkron, butuh server — tambah 1–2 minggu |
+| 9 | Angka `48%` di `SKP 1 BULAN` itu denda apa, dan bisa berubah? | Kalau bisa berubah, harus masuk tabel tarif |
+| 10 | Baris mana saja yang boleh ditimpa di mode manual? | Menentukan desain Fase 4 |
+| 11 | **Klien melihat rincian lengkap, atau hanya total?** | Menentukan isi kartu gambar di Fase 5 |
+| 12 | Estimasi perlu disimpan jadi riwayat, atau sekali pakai lalu hilang? | Menentukan apakah butuh penyimpanan permanen |
+| 13 | Aplikasi mau dipasang di mana — server kantor, atau layanan hosting? | Menentukan pilihan A/B/C perlindungan admin |
 
-Pertanyaan **12** yang paling berdampak ke jadwal. Kalau tarif cukup disimpan di masing-masing HP,
-tidak perlu server sama sekali dan estimasi di atas berlaku. Kalau harus tersinkron antar HP,
-tambahkan backend dan **geser M3 ke ±6–8 minggu**.
+Nomor **1**, **2**, dan **11** paling berdampak ke angka dan ke hasil akhir yang dilihat klien.
+
+Satu pertanyaan dari rencana sebelumnya **sudah terjawab dengan sendirinya**: sinkronisasi tarif antar HP.
+Karena web-based, tarif tersimpan di satu tempat dan semua orang otomatis melihat angka yang sama.
+Di jalur Android ini butuh tambahan 1–2 minggu; sekarang gratis.
 
 ---
 
@@ -217,14 +262,13 @@ tambahkan backend dan **geser M3 ke ±6–8 minggu**.
 Diurutkan dari yang paling mungkin terjadi:
 
 1. **Menunggu jawaban pertanyaan terbuka.** Fase 2 tidak bisa jalan sebelum Fase 1 tuntas.
-   Ini historisnya penyebab keterlambatan terbesar di proyek seperti ini, bukan kodingnya.
-2. **Iterasi UI yang buta.** Claude tidak bisa mengkompilasi Android di sini. Setiap error kompilasi
-   butuh satu putaran bolak-balik. Perkirakan 2–4 putaran per fase UI.
-3. **Tarif ternyata tidak seragam.** Excel sudah terbukti punya versi yang berbeda antar sheet
-   (biaya per km `6850` vs `7000`). Kemungkinan ada perbedaan lain yang baru ketahuan saat uji paralel.
-4. **Kebutuhan sinkronisasi antar HP muncul belakangan.** Kalau baru ketahuan setelah Fase 4,
-   sebagian Fase 4 harus ditulis ulang.
-5. **Aturan Samsat berubah di tengah jalan.** Di luar kendali; mitigasinya adalah halaman admin tarif (Fase 4).
+   Di proyek seperti ini, inilah penyebab keterlambatan terbesar — bukan kodingnya.
+2. **Tarif ternyata tidak seragam.** Excel sudah terbukti punya versi berbeda antar sheet
+   (biaya per km `6850` vs `7000`). Kemungkinan masih ada perbedaan lain yang baru ketahuan saat uji paralel.
+3. **Pembuatan gambar berbeda antar HP.** Sudah diantisipasi di Fase 5, tapi HP lama atau
+   iPhone bisa memunculkan kejutan.
+4. **Keputusan perlindungan admin tertunda.** Fase 6 tidak bisa diselesaikan tanpa itu.
+5. **Aturan Samsat berubah di tengah jalan.** Di luar kendali; itulah gunanya halaman admin tarif.
 
 ---
 
@@ -237,11 +281,21 @@ Hasil pembacaan awal Excel sudah dikoreksi. Yang berlaku:
 | `B13 Pemutihan` tidak dipakai rumus mana pun | **Dihapus** — tidak dibawa ke aplikasi |
 | `B4` (tanggal STNK) hanya untuk tampilan / disalin ke klien | Benar. Di aplikasi, bulan keterlambatan **dihitung otomatis** dari tanggal ini |
 | Biaya per km: `6850` vs `7000` | **`7000/10` yang terbaru** — dipakai |
-| Tabel `K3:N11` (Asal/Tujuan/Jasa/Akom) tidak terhubung rumus | Memang catatan manual untuk memperbaiki tabel harga. Dicatat, lihat pertanyaan #4 |
-| `Hitung Manual` dikira sheet rusak | **Salah baca.** Itu memang mode manual — sel sengaja tidak dikunci agar bisa disesuaikan per klien. Jadi fitur **override manual** di Fase 4 |
-| `B26`/`B27` tidak dipakai | **Terkonfirmasi tidak dipakai** — sudah diverifikasi sampai ke XML mentah; tidak ada satu pun rumus yang membacanya. Tidak dibawa ke aplikasi |
+| Tabel `K3:N11` (Asal/Tujuan/Jasa/Akom) tidak terhubung rumus | Memang catatan manual untuk memperbaiki tabel harga. Lihat pertanyaan #4 |
+| `Hitung Manual` dikira sheet rusak | **Salah baca.** Itu memang mode manual — sel sengaja tidak dikunci agar bisa disesuaikan per klien. Jadi Fase 4 |
+| `B26`/`B27` tidak dipakai | **Terkonfirmasi** — diverifikasi sampai ke XML mentah, tidak ada satu pun rumus yang membacanya. Tidak dibawa ke aplikasi |
 | `B43` pakai range tetap `D2:E141` | Benar, seharusnya kolom penuh. Tidak relevan lagi di aplikasi |
 
-Temuan tambahan (tidak mendesak): 4 *defined name* di workbook rusak (`#REF!`),
-termasuk `HargaBalikNama` yang rusak di semua scope. Tidak berdampak karena rumus memakai
-referensi kolom langsung, tapi menjelaskan kenapa rumusnya tidak memakai nama range.
+Temuan tambahan (tidak mendesak): 4 *defined name* di workbook rusak (`#REF!`), termasuk
+`HargaBalikNama` yang rusak di semua scope. Tidak berdampak karena rumus memakai referensi
+kolom langsung, tapi menjelaskan kenapa rumusnya tidak memakai nama range.
+
+---
+
+## Riwayat keputusan
+
+| Tanggal | Keputusan | Alasan |
+|---|---|---|
+| 2026-09-19 | Platform: **web-based responsif**, menggantikan Android | Bisa dibangun dan diuji penuh dalam satu alur; menghapus putaran kompilasi bolak-balik; sinkronisasi tarif jadi gratis |
+| 2026-09-19 | **Tanpa login** untuk pemakaian harian | Dipakai internal, staf tidak perlu punya akun |
+| 2026-09-19 | Versi mobile = satu aplikasi responsif, bukan aplikasi terpisah | Satu kode, satu perawatan |
