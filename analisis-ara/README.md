@@ -218,3 +218,34 @@ Bandingkan baseline: TRAIN +4,25% / TEST −4,42% / OLD −2,49%.
 - Belum memperhitungkan biaya transaksi, slippage, dan suspensi/UMA.
 
 **Status: belum terbukti, layak diuji paper trading.**
+
+---
+
+# Uji tambahan: bisakah menangkap ARA PERTAMA?
+
+Pertanyaan: mencari saham yang belum ARA lalu akan ARA. Semua varian di bawah
+memakai aturan final (jual-saat-ARA + filter pasar + H=10); yang berbeda hanya
+syarat riwayat ARA-nya.
+
+| Syarat riwayat              | Hit rate TRAIN/TEST/OLD | TRAIN  | TEST(OOS) | OLD(OOS) |
+|-----------------------------|-------------------------|--------|-----------|----------|
+| Pernah ARA <=60h (v2)       | 20,8% / 36,4% / 18,6%   | +7,12% | +6,20%    | +0,22%   |
+| Belum ARA dalam 60 hari     |  7,2% /  5,6% /  5,9%   | +7,09% | −3,75%    | −2,07%   |
+| Belum pernah ARA sama sekali |  4,9% /  2,3% /  5,2%   | +9,06% | −9,04%    | −2,36%   |
+
+**Kesimpulan: tidak bisa diandalkan.** Hit rate anjlok sekitar 6x begitu syarat
+riwayat ARA dicabut. Untuk kelompok "belum pernah ARA", hit rate 2,3% di TEST
+praktis sama dengan base rate acak (2,2-4%) — skor kehilangan hampir seluruh
+daya prediksinya.
+
+Sebabnya mekanistis: daya prediksi pola ini hampir seluruhnya berasal dari
+penggerombolan ARA, temuan paling kokoh dalam analisis ini (replikasi 3/3 blok).
+ARA pertama adalah justru kasus yang tidak menggerombol.
+
+Catat juga kolom TRAIN: "belum pernah ARA" terlihat PALING bagus di sana
+(+9,06%, win rate 60,4%) lalu negatif di kedua blok out-of-sample — pola
+overfitting yang sama seperti temuan "ARA ke-3" pada revisi sebelumnya.
+
+Daftar per 2026-09-18 tersimpan di `screen_belum_ara_20260918.csv` (kolom
+`ara60` dan `ever` memisahkan ketiga kelompok), berguna sebagai pembanding
+paper trading, bukan sebagai sinyal.
