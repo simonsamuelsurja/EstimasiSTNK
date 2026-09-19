@@ -710,3 +710,178 @@ button:focus-visible,
   white-space: nowrap;
   border: 0;
 }
+
+/* ------------------------------------------------------- halaman harga */
+
+.tab-bagian {
+  display: flex;
+  gap: 6px;
+  margin-top: var(--sela);
+  padding: 4px;
+  background: var(--kartu);
+  border: 1px solid var(--garis);
+  border-radius: var(--radius);
+}
+
+.tab-bagian button {
+  flex: 1;
+  min-height: 38px;
+  padding: 8px 6px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--teks-lembut);
+  background: none;
+  border: 0;
+  border-radius: var(--radius-kecil);
+  cursor: pointer;
+}
+
+.tab-bagian button[aria-selected='true'] {
+  background: var(--aksen);
+  color: var(--aksen-teks);
+}
+
+.keterangan {
+  margin: 10px 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--teks-lembut);
+}
+
+.keterangan b {
+  color: var(--teks);
+}
+
+.ringkas-angka {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.ringkas-angka > div {
+  padding: 12px 8px;
+  background: var(--latar);
+  border: 1px solid var(--garis);
+  border-radius: var(--radius-kecil);
+  text-align: center;
+}
+
+.ringkas-nilai {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.ringkas-ket {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  line-height: 1.3;
+  color: var(--teks-samar);
+}
+
+.blok-rute {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--garis);
+}
+
+.blok-rute:last-of-type {
+  border-bottom: 0;
+}
+
+.blok-rute-judul {
+  font-size: 14px;
+  color: var(--teks-lembut);
+  margin-bottom: 8px;
+}
+
+.blok-rute-judul b {
+  color: var(--teks);
+  font-weight: 650;
+}
+
+.blok-rute-isian {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.blok-rute-isian label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.blok-rute-isian label > span {
+  font-size: 11px;
+  color: var(--teks-samar);
+  line-height: 1.25;
+}
+
+.blok-rute-isian input {
+  min-height: 40px;
+  padding: 8px 10px;
+  font-size: 15px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.isian-tarif {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.isian-tarif input {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.isian-tarif[data-diubah='ya'] input {
+  border-color: var(--timpa);
+  background: var(--timpa-lembut);
+}
+
+.satuan-tarif {
+  flex: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--teks-samar);
+  min-width: 34px;
+}
+
+.tombol-berjajar {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0 4px;
+}
+
+.tombol-berjajar .tombol {
+  flex: 1;
+}
+
+.nav-utama {
+  display: flex;
+  gap: 6px;
+}
+
+.nav-utama button {
+  padding: 7px 12px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--teks-lembut);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-kecil);
+  cursor: pointer;
+}
+
+.nav-utama button[aria-current='page'] {
+  color: var(--aksen);
+  background: var(--aksen-lembut);
+}

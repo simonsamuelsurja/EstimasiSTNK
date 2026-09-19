@@ -97,7 +97,34 @@ export function samsatJabodetabek(samsat: string | null): boolean | null {
   return indeksSamsat.get(kunci(samsat)) ?? null
 }
 
-const indeksRute = new Map(daftarRute.map((r) => [`${kunci(r.dari)}→${kunci(r.ke)}`, r]))
+/**
+ * Rute yang berlaku: bawaan ditambah yang diisi lewat halaman daftar harga.
+ * Sengaja bisa diganti saat aplikasi berjalan supaya harga yang baru diisi
+ * langsung dipakai kalkulator, tanpa perlu memuat ulang halaman.
+ */
+let ruteBerlaku: BarisRute[] = daftarRute
+let indeksRute = new Map<string, BarisRute>()
+
+function susunIndeksRute() {
+  indeksRute = new Map()
+  for (const r of ruteBerlaku) {
+    const k = `${kunci(r.dari)}→${kunci(r.ke)}`
+    // Baris yang ditambahkan belakangan menimpa bawaan dengan kunci sama.
+    indeksRute.set(k, r)
+  }
+}
+susunIndeksRute()
+
+/** Mengganti seluruh rute yang berlaku. Dipanggil saat simpanan dimuat atau diubah. */
+export function pasangRute(rute: BarisRute[]): void {
+  ruteBerlaku = rute
+  susunIndeksRute()
+}
+
+/** Rute yang sedang berlaku, termasuk isian pengguna. */
+export function ruteYangBerlaku(): BarisRute[] {
+  return ruteBerlaku
+}
 
 /** Mencari rute satu arah saja, seperti lookup BBN di Excel. */
 export function cariRuteSearah(dari: string, ke: string): BarisRute | null {
@@ -142,12 +169,8 @@ export const namaKecamatanTerurut: string[] = [
   ...daftarKecamatan.map((k) => k.kecamatan).sort((a, b) => a.localeCompare(b, 'id')),
 ]
 
-/** Samsat yang punya harga rute. Yang lain tidak bisa dipakai jasa antar daerah. */
-export const samsatPunyaRute = new Set<string>([
-  ...daftarRute.map((r) => kunci(r.dari)),
-  ...daftarRute.map((r) => kunci(r.ke)),
-])
-
 export function samsatPunyaHargaRute(samsat: string | null): boolean {
-  return samsat ? samsatPunyaRute.has(kunci(samsat)) : false
+  if (!samsat) return false
+  const k = kunci(samsat)
+  return ruteBerlaku.some((r) => kunci(r.dari) === k || kunci(r.ke) === k)
 }

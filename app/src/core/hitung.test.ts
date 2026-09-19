@@ -8,6 +8,7 @@
  */
 
 import { describe, expect, it } from 'vitest'
+import { daftarKecamatan } from './data'
 import { hitungBulanTelat, hitungEstimasi, platDariNopol, uraiTanggal } from './hitung'
 import { terapkanPenyesuaian } from './manual'
 import { petaTarif } from './tarif'
@@ -418,7 +419,7 @@ describe('ketahanan terhadap perubahan tarif', () => {
 
 // ---------------------------------------------------------------------------
 
-describe('kecamatan bernama sama di beberapa daerah', () => {
+describe('kecamatan Curug yang tadinya rancu', () => {
   const dasar = {
     ...KOSONG,
     nopol: 'B 1 AA',
@@ -430,42 +431,26 @@ describe('kecamatan bernama sama di beberapa daerah', () => {
     swdkllj: 100_000,
   }
 
-  it('memakai Samsat yang dipilih staf, bukan yang pertama ditemukan', () => {
-    // "Curug" ada di Kelapa Dua, Depok, dan Cinere. Excel selalu mengambil
-    // Kelapa Dua karena VLOOKUP berhenti di kecocokan pertama, sehingga dua
-    // daerah lain tidak pernah bisa terpilih.
-    const kelapaDua = hitungEstimasi({ ...dasar, kecamatanAsal: 'Curug' })
-    expect(kelapaDua.samsatAsal).toBe('Kelapa Dua')
-
-    const depok = hitungEstimasi({
-      ...dasar,
-      kecamatanAsal: 'Curug',
-      samsatAsalPilihan: 'Depok',
-    })
-    expect(depok.samsatAsal).toBe('Depok')
-
-    const cinere = hitungEstimasi({
-      ...dasar,
-      kecamatanAsal: 'Curug',
-      samsatAsalPilihan: 'Cinere',
-    })
-    expect(cinere.samsatAsal).toBe('Cinere')
+  // Ketiganya memang ada di lapangan. Dulu bernama sama persis, sehingga
+  // VLOOKUP selalu berhenti di yang pertama dan dua sisanya tidak pernah
+  // bisa terpilih. Sekarang namanya menyebut Samsat masing-masing.
+  it.each([
+    ['Curug Kelapa Dua', 'Kelapa Dua'],
+    ['Curug Depok', 'Depok'],
+    ['Curug Cinere', 'Cinere'],
+  ])('%s menuju Samsat %s', (kecamatan, samsat) => {
+    const hasil = hitungEstimasi({ ...dasar, kecamatanAsal: kecamatan })
+    expect(hasil.samsatAsal).toBe(samsat)
+    expect(hasil.judul).toBe(`Mutasi ${samsat} - Jakarta`)
+    expect(hasil.peringatan).toEqual([])
   })
 
-  it('memakai Samsat pilihan sampai ke judul dan pencarian harga', () => {
-    const cinere = hitungEstimasi({
-      ...dasar,
-      kecamatanAsal: 'Curug',
-      samsatAsalPilihan: 'Cinere',
-    })
-    expect(cinere.judul).toBe('Mutasi Cinere - Jakarta')
-    expect(baris(cinere, 'jasaUtama')).toBeGreaterThan(0)
-    expect(cinere.peringatan).toEqual([])
-  })
-
-  it('tanpa pilihan staf, mengambil yang pertama seperti VLOOKUP di Excel', () => {
-    // Penting untuk uji paralel: selisih dengan Excel tidak boleh datang
-    // dari urutan pencarian yang berbeda.
-    expect(hitungEstimasi({ ...dasar, kecamatanAsal: 'Curug' }).samsatAsal).toBe('Kelapa Dua')
+  it('tidak ada lagi nama kecamatan yang dipakai dua daerah', () => {
+    const hitung = new Map<string, number>()
+    for (const k of daftarKecamatan) {
+      hitung.set(k.kecamatan, (hitung.get(k.kecamatan) ?? 0) + 1)
+    }
+    const ganda = [...hitung.entries()].filter(([, n]) => n > 1).map(([nama]) => nama)
+    expect(ganda).toEqual([])
   })
 })

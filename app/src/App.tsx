@@ -1,13 +1,23 @@
 import { useEffect, useMemo, useState } from 'react'
 import { hitungEstimasi } from './core/hitung'
 import { rapikanPenyesuaian, terapkanPenyesuaian } from './core/manual'
+import {
+  ISIAN_KOSONG,
+  muatIsian,
+  ruteGabungan,
+  simpanIsian,
+  tarifGabungan,
+  terapkanIsian,
+  type IsianHarga,
+} from './core/simpanan'
 import { petaTarif } from './core/tarif'
 import type { InputEstimasi, PenyesuaianManual } from './core/tipe'
 import { FormEstimasi } from './ui/FormEstimasi'
+import { HalamanHarga } from './ui/HalamanHarga'
 import { HasilEstimasi } from './ui/HasilEstimasi'
 import { rupiah, tanggalHariIni } from './ui/format'
 
-const KUNCI_SIMPANAN = 'estimasi-stnk.draf'
+const KUNCI_DRAF = 'estimasi-stnk.draf'
 
 const AWAL: InputEstimasi = {
   nopol: '',
@@ -38,7 +48,7 @@ const AWAL: InputEstimasi = {
 /** Draf disimpan di peramban supaya isian tidak hilang kalau halaman tertutup. */
 function muatDraf(): InputEstimasi {
   try {
-    const tersimpan = localStorage.getItem(KUNCI_SIMPANAN)
+    const tersimpan = localStorage.getItem(KUNCI_DRAF)
     if (tersimpan) return { ...AWAL, ...JSON.parse(tersimpan) }
   } catch {
     // Penyimpanan peramban bisa ditolak (mode penyamaran, izin dimatikan).
@@ -47,37 +57,56 @@ function muatDraf(): InputEstimasi {
   return AWAL
 }
 
-const tarif = petaTarif()
+// Harga yang pernah diisi diberlakukan sebelum tampilan pertama digambar,
+// supaya kalkulator tidak sempat memakai harga bawaan lalu berubah.
+const isianAwal = muatIsian()
+terapkanIsian(isianAwal)
+
+type Halaman = 'kalkulator' | 'harga'
 
 export default function App() {
   const [input, setInput] = useState<InputEstimasi>(muatDraf)
   const [penyesuaian, setPenyesuaian] = useState<PenyesuaianManual[]>([])
+  const [isian, setIsian] = useState<IsianHarga>(isianAwal)
+  const [halaman, setHalaman] = useState<Halaman>('kalkulator')
   const [layar, setLayar] = useState<'isian' | 'hasil'>('isian')
 
   useEffect(() => {
     try {
-      localStorage.setItem(KUNCI_SIMPANAN, JSON.stringify(input))
+      localStorage.setItem(KUNCI_DRAF, JSON.stringify(input))
     } catch {
       // Diabaikan dengan sengaja, lihat catatan di muatDraf.
     }
   }, [input])
 
-  const dasar = useMemo(() => hitungEstimasi(input, tarif), [input])
+  const ubahIsianHarga = (baru: IsianHarga) => {
+    const tersimpan = simpanIsian(baru)
+    terapkanIsian(tersimpan)
+    setIsian(tersimpan)
+  }
+
+  const tarif = useMemo(() => petaTarif(tarifGabungan(isian)), [isian])
+  const ruteBerlaku = useMemo(() => ruteGabungan(isian), [isian])
+
+  // `isian` ikut jadi ketergantungan karena harga rute yang berlaku
+  // disimpan di luar React, jadi perubahannya tidak terdeteksi sendiri.
+  const dasar = useMemo(() => hitungEstimasi(input, tarif), [input, tarif, isian])
 
   const hasil = useMemo(
     () => terapkanPenyesuaian(dasar, rapikanPenyesuaian(dasar, penyesuaian), tarif),
-    [dasar, penyesuaian],
+    [dasar, penyesuaian, tarif],
   )
 
   const ubah = (perubahan: Partial<InputEstimasi>) =>
     setInput((lama) => ({ ...lama, ...perubahan }))
 
   const adaGagal = hasil.peringatan.some((p) => p.tingkat === 'gagal')
+  const adaIsianHarga = Object.keys(isian.tarif).length > 0 || isian.rute.length > 0
 
   return (
     <div className="aplikasi">
       <header className="kepala">
-        {layar === 'hasil' && (
+        {halaman === 'kalkulator' && layar === 'hasil' && (
           <button
             type="button"
             className="tutup"
@@ -89,24 +118,34 @@ export default function App() {
         )}
         <h1>
           <span className="merek">Surya Jasa</span>
-          {layar === 'isian' ? 'Kalkulator Estimasi' : 'Rincian Estimasi'}
+          {halaman === 'harga'
+            ? 'Daftar Harga'
+            : layar === 'isian'
+              ? 'Kalkulator Estimasi'
+              : 'Rincian Estimasi'}
         </h1>
-        {layar === 'isian' && (
+        <nav className="nav-utama">
           <button
             type="button"
-            className="tombol-teks"
-            onClick={() => {
-              setInput({ ...AWAL, tanggalStnk: tanggalHariIni() })
-              setPenyesuaian([])
-            }}
+            aria-current={halaman === 'kalkulator' ? 'page' : undefined}
+            onClick={() => setHalaman('kalkulator')}
           >
-            Reset
+            Kalkulator
           </button>
-        )}
+          <button
+            type="button"
+            aria-current={halaman === 'harga' ? 'page' : undefined}
+            onClick={() => setHalaman('harga')}
+          >
+            Harga
+          </button>
+        </nav>
       </header>
 
       <main>
-        {layar === 'isian' ? (
+        {halaman === 'harga' ? (
+          <HalamanHarga isian={isian} ruteBerlaku={ruteBerlaku} onUbah={ubahIsianHarga} />
+        ) : layar === 'isian' ? (
           <FormEstimasi nilai={input} onUbah={ubah} />
         ) : (
           <HasilEstimasi
@@ -115,30 +154,46 @@ export default function App() {
             onUbahPenyesuaian={setPenyesuaian}
           />
         )}
+
+        {halaman === 'harga' && adaIsianHarga && (
+          <p className="catatan-kaki">
+            Isianmu tersimpan di peramban perangkat ini saja. Supaya permanen dan dipakai semua
+            orang, unduh berkasnya di bagian <b>Lihat &amp; Ekspor</b>.{' '}
+            <button
+              type="button"
+              className="tombol-teks"
+              onClick={() => ubahIsianHarga(ISIAN_KOSONG)}
+            >
+              Hapus semua isian
+            </button>
+          </p>
+        )}
       </main>
 
-      <div className="bilah-total">
-        <div className="bilah-isi">
-          <div className="bilah-angka">
-            <span className="bilah-ket">
-              {adaGagal ? 'Estimasi belum lengkap' : 'Estimasi'}
-            </span>
-            <span className="bilah-nilai">{rupiah(hasil.total)}</span>
-            {hasil.kodeDitimpa.length > 0 && (
-              <span className="bilah-asli">
-                {hasil.kodeDitimpa.length} baris disesuaikan · asli {rupiah(hasil.totalAsli)}
+      {halaman === 'kalkulator' && (
+        <div className="bilah-total">
+          <div className="bilah-isi">
+            <div className="bilah-angka">
+              <span className="bilah-ket">
+                {adaGagal ? 'Estimasi belum lengkap' : 'Estimasi'}
               </span>
-            )}
+              <span className="bilah-nilai">{rupiah(hasil.total)}</span>
+              {hasil.kodeDitimpa.length > 0 && (
+                <span className="bilah-asli">
+                  {hasil.kodeDitimpa.length} baris disesuaikan · asli {rupiah(hasil.totalAsli)}
+                </span>
+              )}
+            </div>
+            <button
+              type="button"
+              className="tombol tombol-utama"
+              onClick={() => setLayar(layar === 'isian' ? 'hasil' : 'isian')}
+            >
+              {layar === 'isian' ? 'Lihat Rincian' : 'Ubah Isian'}
+            </button>
           </div>
-          <button
-            type="button"
-            className="tombol tombol-utama"
-            onClick={() => setLayar(layar === 'isian' ? 'hasil' : 'isian')}
-          >
-            {layar === 'isian' ? 'Lihat Rincian' : 'Ubah Isian'}
-          </button>
         </div>
-      </div>
+      )}
     </div>
   )
 }
