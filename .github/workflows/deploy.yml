@@ -1,0 +1,65 @@
+# Membangun dan memasang aplikasi ke GitHub Pages.
+#
+# Pengujian dijalankan lebih dulu dan menghentikan pemasangan bila gagal.
+# Aplikasi ini menghasilkan angka yang ditagihkan ke klien, jadi perubahan
+# yang membuat hitungannya menyimpang tidak boleh sampai ke tangan staf.
+
+name: Pasang ke GitHub Pages
+
+on:
+  push:
+    branches: [claude/tender-bardeen-1ymi98]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Pemasangan yang sedang berjalan dibiarkan selesai, antrean berikutnya
+# cukup menyisakan yang terbaru.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  bangun:
+    name: Uji dan bangun
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - run: npm ci
+
+      - name: Periksa tipe
+        run: npx tsc --noEmit
+
+      - name: Jalankan pengujian
+        run: npm test
+
+      - name: Bangun
+        run: npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: app/dist
+
+  pasang:
+    name: Pasang
+    needs: bangun
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.pemasangan.outputs.page_url }}
+    steps:
+      - id: pemasangan
+        uses: actions/deploy-pages@v4
