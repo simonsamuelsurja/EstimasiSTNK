@@ -885,3 +885,211 @@ button:focus-visible,
   color: var(--aksen);
   background: var(--aksen-lembut);
 }
+
+/* ------------------------------------------------- kartu estimasi (gambar) */
+
+/*
+ * Warna ditulis langsung, bukan lewat peubah tema: kartu ini dikirim ke klien
+ * dan harus selalu tampil sama, walau staf memakai mode gelap.
+ */
+
+.kg {
+  box-sizing: border-box;
+  background: #ffffff;
+  color: #14181d;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  padding: 0 0 26px;
+  overflow: hidden;
+}
+
+.kg-kepala {
+  background: #0f5d52;
+  color: #ffffff;
+  padding: 22px 32px 20px;
+}
+
+.kg-merek {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.kg-tajuk {
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 3px;
+}
+
+.kg-ringkas {
+  padding: 22px 32px 20px;
+  border-bottom: 2px solid #14181d;
+}
+
+.kg-nopol {
+  font-size: 31px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+}
+
+.kg-jasa {
+  font-size: 17px;
+  color: #3f4852;
+  margin-top: 3px;
+}
+
+.kg-fakta {
+  display: flex;
+  gap: 36px;
+  margin-top: 16px;
+}
+
+.kg-fakta > span {
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+}
+
+.kg-fakta b {
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #7a838d;
+  margin-bottom: 1px;
+}
+
+.kg-rincian {
+  padding: 4px 32px 0;
+}
+
+.kg-kelompok {
+  padding: 16px 0 12px;
+  border-bottom: 1px solid #e6e9ec;
+}
+
+.kg-kelompok-kepala {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.kg-kelompok-kepala > span:first-child {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #0f5d52;
+}
+
+.kg-kelompok-kepala > span:last-child {
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #3f4852;
+}
+
+.kg-baris {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.kg-baris-label {
+  flex: none;
+  max-width: 62%;
+  font-size: 15px;
+}
+
+.kg-titik {
+  flex: 1;
+  border-bottom: 1px dotted #c3c9cf;
+  transform: translateY(-3px);
+}
+
+.kg-baris-nilai {
+  flex: none;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.kg-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin: 18px 32px 0;
+  padding: 18px 22px;
+  background: #0f5d52;
+  color: #ffffff;
+  border-radius: 10px;
+}
+
+.kg-total > span:first-child {
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.kg-total-nilai {
+  font-size: 29px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.kg-kaki {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 18px 32px 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #7a838d;
+}
+
+/* ---------------------------------------------- layar pratinjau kartu */
+
+.panggung-kartu {
+  position: fixed;
+  left: -10000px;
+  top: 0;
+  pointer-events: none;
+}
+
+.pratinjau {
+  margin-top: var(--sela);
+  padding: 12px;
+  background: var(--kartu);
+  border: 1px solid var(--garis);
+  border-radius: var(--radius);
+  box-shadow: var(--bayang);
+}
+
+.pratinjau img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-kecil);
+  border: 1px solid var(--garis);
+}
+
+.pratinjau-kosong {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 190px;
+  color: var(--teks-samar);
+  font-size: 14px;
+}

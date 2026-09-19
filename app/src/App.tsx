@@ -15,6 +15,7 @@ import type { InputEstimasi, PenyesuaianManual } from './core/tipe'
 import { FormEstimasi } from './ui/FormEstimasi'
 import { HalamanHarga } from './ui/HalamanHarga'
 import { HasilEstimasi } from './ui/HasilEstimasi'
+import { LayarKartu } from './ui/LayarKartu'
 import { rupiah, tanggalHariIni } from './ui/format'
 
 const KUNCI_DRAF = 'estimasi-stnk.draf'
@@ -63,13 +64,29 @@ const isianAwal = muatIsian()
 terapkanIsian(isianAwal)
 
 type Halaman = 'kalkulator' | 'harga'
+type Layar = 'isian' | 'hasil' | 'kartu'
+
+/** Urutan langkah membuat estimasi, dari mengisi sampai kartu untuk klien. */
+const LANGKAH: Layar[] = ['isian', 'hasil', 'kartu']
+
+const JUDUL_LAYAR: Record<Layar, string> = {
+  isian: 'Kalkulator Estimasi',
+  hasil: 'Rincian Estimasi',
+  kartu: 'Kartu untuk Klien',
+}
+
+const TOMBOL_LANJUT: Record<Layar, string> = {
+  isian: 'Lihat Rincian',
+  hasil: 'Buat Kartu',
+  kartu: 'Ubah Isian',
+}
 
 export default function App() {
   const [input, setInput] = useState<InputEstimasi>(muatDraf)
   const [penyesuaian, setPenyesuaian] = useState<PenyesuaianManual[]>([])
   const [isian, setIsian] = useState<IsianHarga>(isianAwal)
   const [halaman, setHalaman] = useState<Halaman>('kalkulator')
-  const [layar, setLayar] = useState<'isian' | 'hasil'>('isian')
+  const [layar, setLayar] = useState<Layar>('isian')
 
   useEffect(() => {
     try {
@@ -106,23 +123,19 @@ export default function App() {
   return (
     <div className="aplikasi">
       <header className="kepala">
-        {halaman === 'kalkulator' && layar === 'hasil' && (
+        {halaman === 'kalkulator' && layar !== 'isian' && (
           <button
             type="button"
             className="tutup"
-            onClick={() => setLayar('isian')}
-            aria-label="Kembali ke isian"
+            onClick={() => setLayar(LANGKAH[LANGKAH.indexOf(layar) - 1])}
+            aria-label="Kembali ke langkah sebelumnya"
           >
             ‹
           </button>
         )}
         <h1>
           <span className="merek">Surya Jasa</span>
-          {halaman === 'harga'
-            ? 'Daftar Harga'
-            : layar === 'isian'
-              ? 'Kalkulator Estimasi'
-              : 'Rincian Estimasi'}
+          {halaman === 'harga' ? 'Daftar Harga' : JUDUL_LAYAR[layar]}
         </h1>
         <nav className="nav-utama">
           <button
@@ -147,12 +160,14 @@ export default function App() {
           <HalamanHarga isian={isian} ruteBerlaku={ruteBerlaku} onUbah={ubahIsianHarga} />
         ) : layar === 'isian' ? (
           <FormEstimasi nilai={input} onUbah={ubah} />
-        ) : (
+        ) : layar === 'hasil' ? (
           <HasilEstimasi
             hasil={hasil}
             penyesuaian={penyesuaian}
             onUbahPenyesuaian={setPenyesuaian}
           />
+        ) : (
+          <LayarKartu hasil={hasil} />
         )}
 
         {halaman === 'harga' && adaIsianHarga && (
@@ -187,9 +202,11 @@ export default function App() {
             <button
               type="button"
               className="tombol tombol-utama"
-              onClick={() => setLayar(layar === 'isian' ? 'hasil' : 'isian')}
+              onClick={() =>
+                setLayar(layar === 'kartu' ? 'isian' : LANGKAH[LANGKAH.indexOf(layar) + 1])
+              }
             >
-              {layar === 'isian' ? 'Lihat Rincian' : 'Ubah Isian'}
+              {TOMBOL_LANJUT[layar]}
             </button>
           </div>
         </div>
