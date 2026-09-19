@@ -125,8 +125,7 @@ Kalibrasi P(ARA dalam 10 bar ≈ 2 pekan) untuk N skor tertinggi:
 
 - Lift ~5x dari base 4% tetap berarti **~80% kemungkinan TIDAK ARA**. Ini penyaring, bukan prediksi.
 - Ciri yang sama menaikkan peluang ARB — populasinya berekor gemuk dua arah.
-- Screener memprediksi ARA, dan analisis di atas menunjukkan memprediksi ARA
-  **tidak menghasilkan uang** bagi pembeli. Ini alat riset, bukan sinyal beli.
+- Screener memprediksi ARA. Lihat "KOREKSI" di bawah soal apa artinya untuk untung-rugi.
 - Satu sumber data, belum disilang dengan IDX resmi.
 - Tidak ada data suspensi/UMA — sebagian ARA kemungkinan diikuti suspensi yang tidak terhitung.
 
@@ -137,3 +136,77 @@ git clone --depth 1 https://github.com/nofendian17/idx_dataset /tmp/idx_dataset
 pip install pandas numpy pyarrow
 python analisis-ara/screener_ara.py --data /tmp/idx_dataset/data --top 15
 ```
+
+
+---
+
+# KOREKSI (revisi kedua)
+
+## Kesalahan pada versi pertama
+
+Versi pertama dokumen ini menyimpulkan "memprediksi ARA tidak menghasilkan uang".
+Kesimpulan itu **keliru** karena diambil dari pengukuran **beli SESUDAH ARA terjadi**
+(entry di open berikutnya, kena gap 5-9,5%), lalu dipakai untuk menghakimi
+**beli SEBELUM ARA** — dua transaksi yang berbeda sama sekali dan tidak pernah diuji.
+
+## Hasil uji beli-sebelum-ARA
+
+Beli top-10 screen di open besok, tahan 10 bar, dipecah menurut apakah ARA datang:
+
+| Blok  | Kena ARA | Return kena ARA        | Return tidak ARA        | Gabungan |
+|-------|----------|------------------------|-------------------------|----------|
+| TRAIN | 16,1%    | +29,96% (med +22,21%)  | −0,68%  (med −2,59%)    | +4,25%   |
+| TEST  | 20,6%    | +19,58% (med +12,59%)  | −10,63% (med −12,98%)   | −4,42%   |
+| OLD   |  8,1%    | +18,37% (med +11,55%)  | −4,33%  (med −6,41%)    | −2,49%   |
+
+**Kalau ARA-nya datang, untungnya nyata dan konsisten di tiga blok** (win rate 62–72%).
+Masalahnya ada di 79–92% yang tidak kena.
+
+Hit rate minimum untuk impas: TRAIN 2,2% (punya 16,1%, lewat), TEST 35,2%
+(punya 20,6%, gagal), OLD 19,1% (punya 8,1%, gagal).
+
+## Uji perbaikan (25 varian diuji di tiga blok)
+
+**GAGAL — stop loss.** Hipotesisnya salah total. Stop −5% pada top10:
+TRAIN +4,25% jadi −7,98%, win rate 45,8% jadi 15,6%. Sebabnya: saham-saham ini
+volatilitas hariannya >6,7% (desil teratas), sehingga stop ketat tersentuh
+noise sebelum tren jalan. Stop mengubah distribusi berekor-kanan menjadi
+rentetan kerugian kecil yang pasti. Semua level stop (−5%, −8%, −10%, −15%)
+memperburuk hasil di ketiga blok.
+
+**SEBAGIAN — penyempitan.** top10 ke top3 + syarat "pernah ARA dalam 60 hari"
+menaikkan hit rate: TRAIN 16,1%→21,0%, TEST 20,6%→30,0%, OLD 8,1%→15,0%.
+Perbaikan nyata dan replikasi, tapi return gabungan masih negatif di dua blok OOS.
+
+**BERHASIL — aturan keluar + filter rezim.** Dua tambahan:
+1. `jual di open setelah ARA` (bukan tahan sampai bar ke-10). Dasarnya temuan
+   yang sudah tervalidasi 3 blok: pemegang yang jual di gap menang 74–84%.
+2. `filter pasar`: hanya entry bila return pasar 20 hari trailing > 0.
+
+## Konfigurasi final
+
+`top3` + `pernah ARA dalam 60 hari` + `jual di open setelah ARA` +
+`filter pasar 20h > 0` + horizon maksimum 10 bar:
+
+| Blok      | Mean   | Median | Win rate | Hit rate ARA |
+|-----------|--------|--------|----------|--------------|
+| TRAIN     | +7,12% | +0,06% | 50,3%    | 20,8%        |
+| TEST(OOS) | +6,20% | +4,76% | 52,3%    | 36,4%        |
+| OLD(OOS)  | +0,22% | −4,67% | 38,3%    | 18,6%        |
+
+Bandingkan baseline: TRAIN +4,25% / TEST −4,42% / OLD −2,49%.
+
+## Peringatan yang harus melekat
+
+- **25 varian diuji.** Menemukan satu yang bagus di 2 dari 3 blok secara
+  kebetulan sangat mungkin. Ini alasan hasil di atas belum boleh disebut terbukti.
+- **Blok OLD tetap lemah**: mean +0,22% praktis nol, median −4,67%, win 38,3%.
+  Perbaikan ini tidak bekerja di rezim 2022/23.
+- Aturan keluar dan filter pasar bukan parameter yang dipancing dari data —
+  keduanya berasal dari mekanisme yang sudah divalidasi terpisah. Itu mengurangi,
+  tapi tidak menghapus, risiko overfitting.
+- Filter pasar membuat strategi **tidak entry sama sekali** di periode pasar lemah
+  (29% hari di TEST dilewati). Menahan diri adalah bagian dari strategi.
+- Belum memperhitungkan biaya transaksi, slippage, dan suspensi/UMA.
+
+**Status: belum terbukti, layak diuji paper trading.**
