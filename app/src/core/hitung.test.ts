@@ -454,3 +454,63 @@ describe('kecamatan Curug yang tadinya rancu', () => {
     expect(ganda).toEqual([])
   })
 })
+
+// ---------------------------------------------------------------------------
+
+describe('BBN selalu di wilayah yang sama', () => {
+  const bbn: InputEstimasi = {
+    ...KOSONG,
+    nopol: 'B 1234 ABC',
+    tanggalStnk: '2026-01-10',
+    tanggalAcuan: '2026-09-19',
+    jasa: 'BBN',
+    kendaraan: 'Mobil',
+    kecamatanAsal: 'Jakarta',
+    pkb: 1_000_000,
+    swdkllj: 143_000,
+  }
+
+  it('memakai wilayah asal sebagai tujuannya sendiri', () => {
+    const hasil = hitungEstimasi(bbn)
+    expect(hasil.samsatAsal).toBe('Jakarta')
+    expect(hasil.samsatTujuan).toBe('Jakarta')
+  })
+
+  it('mengambil harga dari baris wilayah yang sama di tabel rute', () => {
+    // Baris Jakarta ke Jakarta: Balik Nama Mobil 650.000.
+    expect(baris(hitungEstimasi(bbn), 'jasaUtama')).toBe(650_000)
+  })
+
+  it('menyebut satu wilayah di judul, bukan mengulangnya dua kali', () => {
+    expect(hitungEstimasi(bbn).judul).toBe('BBN Jakarta')
+  })
+
+  it('mengabaikan kecamatan tujuan walau sempat terisi', () => {
+    // Di Excel, BBN dengan asal dan tujuan berbeda menghasilkan harga lintas
+    // wilayah. Di sini isian tujuan tidak lagi berpengaruh.
+    const denganTujuanLain = hitungEstimasi({
+      ...bbn,
+      kecamatanTujuan: 'Cianjur',
+      samsatTujuanPilihan: 'Cianjur',
+    })
+    expect(denganTujuanLain.samsatTujuan).toBe('Jakarta')
+    expect(baris(denganTujuanLain, 'jasaUtama')).toBe(650_000)
+    expect(denganTujuanLain.total).toBe(hitungEstimasi(bbn).total)
+  })
+
+  it('dihitung sebagai wilayah Jadetabek karena asal dan tujuannya sama', () => {
+    expect(hitungEstimasi(bbn).jadetabek).toBe(true)
+    // Di luar Jadetabek tetap terbaca benar.
+    expect(hitungEstimasi({ ...bbn, kecamatanAsal: 'Cianjur' }).jadetabek).toBe(false)
+  })
+
+  it('Mutasi tetap memerlukan tujuan terpisah', () => {
+    const tanpaTujuan = hitungEstimasi({ ...bbn, jasa: 'Mutasi' })
+    expect(tanpaTujuan.samsatTujuan).toBeNull()
+    expect(tanpaTujuan.peringatan.some((p) => p.tingkat === 'gagal')).toBe(true)
+
+    const denganTujuan = hitungEstimasi({ ...bbn, jasa: 'Mutasi', kecamatanTujuan: 'Cianjur' })
+    expect(denganTujuan.samsatTujuan).toBe('Cianjur')
+    expect(denganTujuan.judul).toBe('Mutasi Jakarta - Cianjur')
+  })
+})

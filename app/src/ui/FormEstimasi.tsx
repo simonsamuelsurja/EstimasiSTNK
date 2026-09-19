@@ -3,7 +3,7 @@
 import { hitungBulanTelat, uraiTanggal } from '../core/hitung'
 import { petaTarif } from '../core/tarif'
 import {
-  JASA_DUA_LOKASI,
+  JASA_PERLU_TUJUAN,
   JASA_PERPANJANG,
   JENIS_JASA,
   JENIS_KENDARAAN,
@@ -16,6 +16,7 @@ import {
 import { BarisIsian, IsianRupiah, Kartu, Sakelar, Segmen } from './dasar'
 import { tanggalHariIni } from './format'
 import { PilihDaerah } from './PilihDaerah'
+import { PilihTanggal } from './PilihTanggal'
 
 const tarif = petaTarif()
 
@@ -26,7 +27,7 @@ export function FormEstimasi({
   nilai: InputEstimasi
   onUbah: (perubahan: Partial<InputEstimasi>) => void
 }) {
-  const duaLokasi = JASA_DUA_LOKASI.includes(nilai.jasa)
+  const perluTujuan = JASA_PERLU_TUJUAN.includes(nilai.jasa)
   const perpanjangan = JASA_PERPANJANG.includes(nilai.jasa)
 
   const bulanTelat = hitungBulanTelat(
@@ -57,11 +58,10 @@ export function FormEstimasi({
               : `Terhitung ${bulanTelat} bulan terlambat, sudah termasuk margin ${tarif['denda.marginBulan']} bulan`
           }
         >
-          <input
-            type="date"
-            value={nilai.tanggalStnk}
-            onChange={(e) => onUbah({ tanggalStnk: e.target.value })}
-            aria-label="Tanggal jatuh tempo STNK"
+          <PilihTanggal
+            label="Tanggal jatuh tempo STNK"
+            nilai={nilai.tanggalStnk}
+            onUbah={(iso) => onUbah({ tanggalStnk: iso })}
           />
         </BarisIsian>
 
@@ -100,17 +100,17 @@ export function FormEstimasi({
         )}
       </Kartu>
 
-      <Kartu judul={duaLokasi ? 'Asal & Tujuan' : 'Lokasi'}>
-        <BarisIsian label={duaLokasi ? 'Kecamatan asal' : 'Kecamatan'}>
+      <Kartu judul={perluTujuan ? 'Asal & Tujuan' : 'Lokasi'}>
+        <BarisIsian label={perluTujuan ? 'Kecamatan asal' : 'Kecamatan'}>
           <PilihDaerah
-            label={duaLokasi ? 'Kecamatan asal' : 'Kecamatan'}
+            label={perluTujuan ? 'Kecamatan asal' : 'Kecamatan'}
             kecamatan={nilai.kecamatanAsal}
             samsat={nilai.samsatAsalPilihan}
             onUbah={(kec, sam) => onUbah({ kecamatanAsal: kec, samsatAsalPilihan: sam })}
           />
         </BarisIsian>
 
-        {duaLokasi && (
+        {perluTujuan && (
           <BarisIsian label="Kecamatan tujuan">
             <PilihDaerah
               label="Kecamatan tujuan"

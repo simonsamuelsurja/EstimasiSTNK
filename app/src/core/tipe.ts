@@ -29,8 +29,23 @@ export const PILIHAN_NOPOL = [
 ] as const
 export type PilihanNopol = (typeof PILIHAN_NOPOL)[number]
 
-/** Jasa yang memerlukan dua lokasi (asal dan tujuan). */
-export const JASA_DUA_LOKASI: JenisJasa[] = ['BBN', 'Mutasi', 'Pindah Alamat']
+/**
+ * Jasa yang harganya dicari lewat tabel rute antar Samsat.
+ *
+ * BBN ikut di sini walau tidak berpindah wilayah: harganya tetap dicari di
+ * tabel rute, pada baris wilayah yang sama (mis. Jakarta ke Jakarta).
+ */
+export const JASA_PAKAI_RUTE: JenisJasa[] = ['BBN', 'Mutasi', 'Pindah Alamat']
+
+/**
+ * Jasa yang benar-benar memerlukan lokasi tujuan terpisah.
+ *
+ * BBN TIDAK termasuk: balik nama selalu di wilayah yang sama, dan begitu
+ * berpindah wilayah namanya jadi Mutasi. Di Excel keduanya diisi terpisah,
+ * sehingga BBN dengan asal dan tujuan berbeda bisa terisi tanpa tertahan
+ * dan menghasilkan harga lintas wilayah yang tidak semestinya.
+ */
+export const JASA_PERLU_TUJUAN: JenisJasa[] = ['Mutasi', 'Pindah Alamat']
 
 /** Jasa revisi nopol, yang aturannya menyimpang dari jasa lain. */
 export const JASA_REVISI: JenisJasa[] = [

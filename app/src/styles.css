@@ -1112,3 +1112,108 @@ button:focus-visible,
   resize: vertical;
   white-space: pre;
 }
+
+/* ---------------------------------------------------- pemilih tanggal roda */
+
+/* Tinggi baris harus sama dengan TINGGI_BARIS di PilihTanggal.tsx. */
+.roda {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  gap: 4px;
+  padding: 6px 4px;
+  background: var(--latar);
+  border: 1px solid var(--garis-tebal);
+  border-radius: var(--radius-kecil);
+}
+
+.roda-kolom {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.roda-nama {
+  /* Tingginya dipatok supaya letak bingkai penanda di bawah bisa dihitung
+     pasti, bukan bergantung pada tinggi baris huruf yang berbeda antar font. */
+  height: 18px;
+  line-height: 15px;
+  padding-bottom: 3px;
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--teks-samar);
+  text-align: center;
+}
+
+.roda-gulir {
+  height: 200px; /* 5 baris */
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  z-index: 1;
+}
+
+.roda-gulir::-webkit-scrollbar {
+  display: none;
+}
+
+.roda-gulir:focus-visible {
+  outline: 2px solid var(--aksen);
+  outline-offset: -2px;
+  border-radius: 6px;
+}
+
+/* Dua baris kosong di atas dan bawah supaya pilihan pertama dan terakhir
+   tetap bisa berhenti di tengah. */
+.roda-jarak {
+  height: 80px;
+}
+
+.roda-baris {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-snap-align: center;
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+  color: var(--teks-samar);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 4px;
+  transition: color 0.12s ease;
+}
+
+.roda-baris[data-terpilih='ya'] {
+  color: var(--teks);
+  font-weight: 650;
+}
+
+/* Bingkai penanda baris terpilih, di belakang teks. */
+.roda-penanda {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  /* 6px jarak dalam roda + 18px tinggi label + 80px dua baris kosong. */
+  top: calc(6px + 18px + 80px);
+  height: 40px;
+  border-top: 1px solid var(--garis-tebal);
+  border-bottom: 1px solid var(--garis-tebal);
+  background: var(--aksen-lembut);
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roda-gulir {
+    scroll-behavior: auto;
+  }
+}

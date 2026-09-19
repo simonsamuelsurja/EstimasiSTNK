@@ -20,7 +20,8 @@ import {
 } from './data'
 import { ambilTarif, petaTarif, type PetaTarif } from './tarif'
 import {
-  JASA_DUA_LOKASI,
+  JASA_PAKAI_RUTE,
+  JASA_PERLU_TUJUAN,
   JASA_PERPANJANG,
   JASA_REVISI,
   type BarisBiaya,
@@ -326,7 +327,7 @@ function hitungJasa(k: Konteks): number {
     return didukung ? ambilTarif(t, 'jauh.jasa') : 0
   }
 
-  const butuhRute = JASA_DUA_LOKASI.includes(input.jasa)
+  const butuhRute = JASA_PAKAI_RUTE.includes(input.jasa)
   if (butuhRute) {
     if (!samsatAsal || !samsatTujuan) {
       k.peringatan.push({ tingkat: 'gagal', pesan: 'Samsat asal atau tujuan belum lengkap.' })
@@ -448,9 +449,10 @@ function susunJudul(k: Konteks): string {
     if (JASA_PERPANJANG.includes(input.jasa)) return `${input.jasa} ${asal}`
     return input.jasa
   }
-  if (JASA_DUA_LOKASI.includes(input.jasa)) {
+  if (JASA_PERLU_TUJUAN.includes(input.jasa)) {
     return `${input.jasa} ${samsatAsal ?? '?'} - ${samsatTujuan ?? '?'}`
   }
+  // BBN cukup menyebut satu wilayah, bukan "Jakarta - Jakarta".
   return `${input.jasa} ${samsatAsal ?? '?'}`
 }
 
@@ -469,12 +471,16 @@ export function hitungEstimasi(
     input.kecamatanAsal === KECAMATAN_LAINNYA
       ? null
       : (input.samsatAsalPilihan ?? samsatDariKecamatan(input.kecamatanAsal))
-  const perluTujuan = JASA_DUA_LOKASI.includes(input.jasa)
-  const samsatTujuan = !perluTujuan
-    ? null
-    : input.kecamatanTujuan === KECAMATAN_LAINNYA
+  const perluTujuan = JASA_PERLU_TUJUAN.includes(input.jasa)
+  const samsatTujuan = perluTujuan
+    ? input.kecamatanTujuan === KECAMATAN_LAINNYA
       ? null
       : (input.samsatTujuanPilihan ?? samsatDariKecamatan(input.kecamatanTujuan))
+    : // BBN tidak punya tujuan terpisah: wilayahnya sama dengan asal, sehingga
+      // harganya dicari pada baris wilayah yang sama di tabel rute.
+      JASA_PAKAI_RUTE.includes(input.jasa)
+      ? samsatAsal
+      : null
 
   if (input.kecamatanAsal && input.kecamatanAsal !== KECAMATAN_LAINNYA && !samsatAsal) {
     peringatan.push({
