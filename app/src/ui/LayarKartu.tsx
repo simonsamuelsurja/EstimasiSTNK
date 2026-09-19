@@ -9,13 +9,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { kartuLayakDikirim } from '../core/kartu'
 import type { HasilDenganPenyesuaian } from '../core/tipe'
 import { Kartu, Peringatan } from './dasar'
-import {
-  bagikanGambar,
-  buatGambar,
-  namaBerkasGambar,
-  peramban_iOS,
-  unduhGambar,
-} from './gambar'
+import { bagikanGambar, buatGambar, namaBerkasGambar, unduhGambar } from './gambar'
 import { KartuEstimasi } from './KartuEstimasi'
 
 type Keadaan = 'menggambar' | 'siap' | 'gagal'
@@ -53,11 +47,13 @@ export function LayarKartu({ hasil }: { hasil: HasilDenganPenyesuaian }) {
       setPesan('Gambar dikirim ke menu berbagi.')
       return
     }
-    const berhasil = unduhGambar(gambar, namaBerkas)
+    // Unduhan bisa diam-diam tidak jalan: Safari di iPhone kerap menolaknya,
+    // dan halaman yang dimuat di dalam kerangka terbatas ikut memblokirnya.
+    // Karena itu petunjuk cadangan selalu disebut, bukan hanya saat gagal.
+    unduhGambar(gambar, namaBerkas)
     setPesan(
-      berhasil && !peramban_iOS()
-        ? `Tersimpan sebagai ${namaBerkas}`
-        : 'Kalau gambar tidak tersimpan otomatis, tekan lama gambar di bawah lalu pilih simpan.',
+      `Gambar sedang diunduh sebagai ${namaBerkas}. Kalau tidak tersimpan otomatis, ` +
+        'tekan lama gambar di bawah lalu pilih simpan.',
     )
   }
 

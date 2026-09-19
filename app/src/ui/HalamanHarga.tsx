@@ -383,6 +383,8 @@ function satuanPendek(satuan: string): string {
 // ---------------------------------------------------------------------------
 
 function LihatEkspor({ isian, ruteBerlaku }: { isian: IsianHarga; ruteBerlaku: BarisRute[] }) {
+  const [teks, setTeks] = useState<{ nama: string; isi: string } | null>(null)
+  const [tersalin, setTersalin] = useState(false)
   const katalog = useMemo(
     () =>
       katalogHarga(tarifGabungan(isian)).map((t) =>
@@ -404,22 +406,55 @@ function LihatEkspor({ isian, ruteBerlaku }: { isian: IsianHarga; ruteBerlaku: B
           <button
             type="button"
             className="tombol tombol-utama"
-            onClick={() =>
-              unduhTeks(katalogKeCsv(katalog), namaBerkasEkspor('csv'), 'text/csv')
-            }
+            onClick={() => {
+              const isi = katalogKeCsv(katalog)
+              const nama = namaBerkasEkspor('csv')
+              unduhTeks(isi, nama, 'text/csv')
+              setTeks({ nama, isi })
+              setTersalin(false)
+            }}
           >
             Unduh CSV
           </button>
           <button
             type="button"
             className="tombol tombol-kedua"
-            onClick={() =>
-              unduhTeks(katalogKeJson(katalog), namaBerkasEkspor('json'), 'application/json')
-            }
+            onClick={() => {
+              const isi = katalogKeJson(katalog)
+              const nama = namaBerkasEkspor('json')
+              unduhTeks(isi, nama, 'application/json')
+              setTeks({ nama, isi })
+              setTersalin(false)
+            }}
           >
             Unduh JSON
           </button>
         </div>
+
+        {teks && (
+          <>
+            <p className="keterangan">
+              Berkas <b>{teks.nama}</b> sedang diunduh. Sebagian peramban memblokir unduhan
+              otomatis tanpa memberi tahu — kalau berkasnya tidak muncul, salin isinya dari kotak
+              di bawah.
+            </p>
+            <textarea className="kotak-ekspor" readOnly value={teks.isi} aria-label="Isi ekspor" />
+            <div className="tombol-berjajar">
+              <button
+                type="button"
+                className="tombol tombol-kedua"
+                onClick={() => {
+                  void navigator.clipboard
+                    ?.writeText(teks.isi)
+                    .then(() => setTersalin(true))
+                    .catch(() => setTersalin(false))
+                }}
+              >
+                {tersalin ? 'Tersalin' : 'Salin Semua'}
+              </button>
+            </div>
+          </>
+        )}
       </Kartu>
 
       {katalog.map((t) => (

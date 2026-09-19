@@ -106,7 +106,9 @@ body {
 
 .kepala {
   position: sticky;
-  top: 0;
+  /* Bukan 0: halaman bisa dimuat dalam kerangka yang sudah memberi jarak
+     untuk bilah sistem ponsel. */
+  top: env(safe-area-inset-top, 0px);
   z-index: 20;
   margin: 0 calc(var(--sela) * -1);
   padding: 12px var(--sela);
@@ -1092,4 +1094,21 @@ button:focus-visible,
   min-height: 190px;
   color: var(--teks-samar);
   font-size: 14px;
+}
+
+.kotak-ekspor {
+  display: block;
+  width: 100%;
+  min-height: 170px;
+  margin-top: 8px;
+  padding: 10px 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--teks);
+  background: var(--latar);
+  border: 1px solid var(--garis-tebal);
+  border-radius: var(--radius-kecil);
+  resize: vertical;
+  white-space: pre;
 }
