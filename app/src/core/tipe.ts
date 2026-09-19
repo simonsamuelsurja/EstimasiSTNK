@@ -57,6 +57,17 @@ export interface InputEstimasi {
   /** Kecamatan tujuan. Hanya dipakai jasa yang butuh dua lokasi. */
   kecamatanTujuan: string
 
+  /**
+   * Samsat yang dipilih langsung oleh staf.
+   *
+   * Ada nama kecamatan yang dipakai beberapa daerah sekaligus — "Curug"
+   * misalnya ada di Kelapa Dua, Depok, dan Cinere. Excel selalu mengambil yang
+   * pertama, sehingga dua sisanya tidak pernah bisa terpilih. Di sini pilihan
+   * staf yang menentukan, dan pencarian berdasarkan nama hanya jadi cadangan.
+   */
+  samsatAsalPilihan?: string
+  samsatTujuanPilihan?: string
+
   gantiKaleng: boolean
   pkb: number
   swdkllj: number

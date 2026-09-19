@@ -466,13 +466,15 @@ export function hitungEstimasi(
   const acuan = acuanHariIni(input)
 
   const samsatAsal =
-    input.kecamatanAsal === KECAMATAN_LAINNYA ? null : samsatDariKecamatan(input.kecamatanAsal)
+    input.kecamatanAsal === KECAMATAN_LAINNYA
+      ? null
+      : (input.samsatAsalPilihan ?? samsatDariKecamatan(input.kecamatanAsal))
   const perluTujuan = JASA_DUA_LOKASI.includes(input.jasa)
   const samsatTujuan = !perluTujuan
     ? null
     : input.kecamatanTujuan === KECAMATAN_LAINNYA
       ? null
-      : samsatDariKecamatan(input.kecamatanTujuan)
+      : (input.samsatTujuanPilihan ?? samsatDariKecamatan(input.kecamatanTujuan))
 
   if (input.kecamatanAsal && input.kecamatanAsal !== KECAMATAN_LAINNYA && !samsatAsal) {
     peringatan.push({

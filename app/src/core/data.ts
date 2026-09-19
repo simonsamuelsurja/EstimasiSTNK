@@ -72,7 +72,17 @@ export const KECAMATAN_LAINNYA = 'Lainnya'
 
 const kunci = (s: string) => s.trim().toLowerCase()
 
-const indeksKecamatan = new Map(daftarKecamatan.map((k) => [kunci(k.kecamatan), k.samsat]))
+/**
+ * Nama kecamatan bisa dipakai beberapa daerah sekaligus — "Curug" ada di
+ * Kelapa Dua, Depok, dan Cinere. Yang PERTAMA yang menang, meniru VLOOKUP di
+ * Excel yang berhenti pada kecocokan pertama. Ini hanya jalan cadangan:
+ * kalau staf memilih Samsat langsung lewat daftar, pilihannya yang dipakai.
+ */
+const indeksKecamatan = new Map<string, string>()
+for (const k of daftarKecamatan) {
+  const kc = kunci(k.kecamatan)
+  if (!indeksKecamatan.has(kc)) indeksKecamatan.set(kc, k.samsat)
+}
 const indeksSamsat = new Map(daftarSamsat.map((s) => [kunci(s.samsat), s.jabodetabek]))
 
 /** Menerjemahkan nama kecamatan jadi Samsat. `null` bila tidak terdaftar. */

@@ -415,3 +415,57 @@ describe('ketahanan terhadap perubahan tarif', () => {
     expect(baris(hasil, 'tnkb')).toBe(100_000)
   })
 })
+
+// ---------------------------------------------------------------------------
+
+describe('kecamatan bernama sama di beberapa daerah', () => {
+  const dasar = {
+    ...KOSONG,
+    nopol: 'B 1 AA',
+    tanggalStnk: '2025-01-01',
+    tanggalAcuan: '2026-09-19',
+    jasa: 'Mutasi' as const,
+    kecamatanTujuan: 'Jakarta',
+    pkb: 1_000_000,
+    swdkllj: 100_000,
+  }
+
+  it('memakai Samsat yang dipilih staf, bukan yang pertama ditemukan', () => {
+    // "Curug" ada di Kelapa Dua, Depok, dan Cinere. Excel selalu mengambil
+    // Kelapa Dua karena VLOOKUP berhenti di kecocokan pertama, sehingga dua
+    // daerah lain tidak pernah bisa terpilih.
+    const kelapaDua = hitungEstimasi({ ...dasar, kecamatanAsal: 'Curug' })
+    expect(kelapaDua.samsatAsal).toBe('Kelapa Dua')
+
+    const depok = hitungEstimasi({
+      ...dasar,
+      kecamatanAsal: 'Curug',
+      samsatAsalPilihan: 'Depok',
+    })
+    expect(depok.samsatAsal).toBe('Depok')
+
+    const cinere = hitungEstimasi({
+      ...dasar,
+      kecamatanAsal: 'Curug',
+      samsatAsalPilihan: 'Cinere',
+    })
+    expect(cinere.samsatAsal).toBe('Cinere')
+  })
+
+  it('memakai Samsat pilihan sampai ke judul dan pencarian harga', () => {
+    const cinere = hitungEstimasi({
+      ...dasar,
+      kecamatanAsal: 'Curug',
+      samsatAsalPilihan: 'Cinere',
+    })
+    expect(cinere.judul).toBe('Mutasi Cinere - Jakarta')
+    expect(baris(cinere, 'jasaUtama')).toBeGreaterThan(0)
+    expect(cinere.peringatan).toEqual([])
+  })
+
+  it('tanpa pilihan staf, mengambil yang pertama seperti VLOOKUP di Excel', () => {
+    // Penting untuk uji paralel: selisih dengan Excel tidak boleh datang
+    // dari urutan pencarian yang berbeda.
+    expect(hitungEstimasi({ ...dasar, kecamatanAsal: 'Curug' }).samsatAsal).toBe('Kelapa Dua')
+  })
+})
