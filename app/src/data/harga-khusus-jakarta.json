@@ -1,0 +1,114 @@
+[
+  {
+    "layanan": "Mutasi",
+    "kendaraan": "Mobil",
+    "wilayah": "Bogor",
+    "biayaProses": 2500000,
+    "jasa": 2200000,
+    "penulisanBpkb": 900000
+  },
+  {
+    "layanan": "Mutasi",
+    "kendaraan": "Mobil",
+    "wilayah": "Serang",
+    "biayaProses": 2500000,
+    "jasa": 2200000,
+    "penulisanBpkb": 900000
+  },
+  {
+    "layanan": "Mutasi",
+    "kendaraan": "Mobil",
+    "wilayah": "Cilegon",
+    "biayaProses": 2500000,
+    "jasa": 2200000,
+    "penulisanBpkb": 1250000
+  },
+  {
+    "layanan": "Mutasi",
+    "kendaraan": "Mobil",
+    "wilayah": "Bandung",
+    "biayaProses": 3750000,
+    "jasa": 3000000,
+    "penulisanBpkb": 1000000
+  },
+  {
+    "layanan": "Mutasi",
+    "kendaraan": "Motor",
+    "wilayah": "Bogor",
+    "biayaProses": 2250000,
+    "jasa": 2100000,
+    "penulisanBpkb": 800000
+  },
+  {
+    "layanan": "Mutasi",
+    "kendaraan": "Motor",
+    "wilayah": "Serang",
+    "biayaProses": 2250000,
+    "jasa": 2100000,
+    "penulisanBpkb": 800000
+  },
+  {
+    "layanan": "Mutasi",
+    "kendaraan": "Motor",
+    "wilayah": "Cilegon",
+    "biayaProses": 2250000,
+    "jasa": 2200000,
+    "penulisanBpkb": 1100000
+  },
+  {
+    "layanan": "BBN",
+    "kendaraan": "Mobil",
+    "wilayah": "Bogor",
+    "biayaProses": 1650000,
+    "jasa": 1500000,
+    "penulisanBpkb": 900000
+  },
+  {
+    "layanan": "BBN",
+    "kendaraan": "Mobil",
+    "wilayah": "Serang",
+    "biayaProses": 1650000,
+    "jasa": 1500000,
+    "penulisanBpkb": 900000
+  },
+  {
+    "layanan": "BBN",
+    "kendaraan": "Mobil",
+    "wilayah": "Cilegon",
+    "biayaProses": 1750000,
+    "jasa": 1500000,
+    "penulisanBpkb": 1250000
+  },
+  {
+    "layanan": "BBN",
+    "kendaraan": "Mobil",
+    "wilayah": "Bandung",
+    "biayaProses": 2500000,
+    "jasa": 3000000,
+    "penulisanBpkb": 1000000
+  },
+  {
+    "layanan": "BBN",
+    "kendaraan": "Motor",
+    "wilayah": "Bogor",
+    "biayaProses": 1250000,
+    "jasa": 1350000,
+    "penulisanBpkb": 800000
+  },
+  {
+    "layanan": "BBN",
+    "kendaraan": "Motor",
+    "wilayah": "Serang",
+    "biayaProses": 1250000,
+    "jasa": 1350000,
+    "penulisanBpkb": 800000
+  },
+  {
+    "layanan": "BBN",
+    "kendaraan": "Motor",
+    "wilayah": "Cilegon",
+    "biayaProses": 1450000,
+    "jasa": 1400000,
+    "penulisanBpkb": 1100000
+  }
+]

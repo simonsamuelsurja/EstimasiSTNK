@@ -514,3 +514,145 @@ describe('BBN selalu di wilayah yang sama', () => {
     expect(denganTujuan.judul).toBe('Mutasi Jakarta - Cianjur')
   })
 })
+
+describe('harga khusus Jakarta', () => {
+  const dasar: InputEstimasi = {
+    ...KOSONG,
+    nopol: 'B 1234 ABC',
+    tanggalStnk: '2026-01-10',
+    tanggalAcuan: '2026-09-19',
+    pkb: 1_000_000,
+    swdkllj: 143_000,
+  }
+
+  // [wilayah, kendaraan, biaya proses, jasa, penulisan BPKB], sesuai daftar pemilik.
+  const mutasi: [string, 'Mobil' | 'Motor', number, number, number][] = [
+    ['Bogor', 'Mobil', 2_500_000, 2_200_000, 900_000],
+    ['Serang', 'Mobil', 2_500_000, 2_200_000, 900_000],
+    ['Cilegon', 'Mobil', 2_500_000, 2_200_000, 1_250_000],
+    ['Bandung', 'Mobil', 3_750_000, 3_000_000, 1_000_000],
+    ['Bogor', 'Motor', 2_250_000, 2_100_000, 800_000],
+    ['Serang', 'Motor', 2_250_000, 2_100_000, 800_000],
+    ['Cilegon', 'Motor', 2_250_000, 2_200_000, 1_100_000],
+  ]
+
+  const bbn: [string, 'Mobil' | 'Motor', number, number, number][] = [
+    ['Bogor', 'Mobil', 1_650_000, 1_500_000, 900_000],
+    ['Serang', 'Mobil', 1_650_000, 1_500_000, 900_000],
+    ['Cilegon', 'Mobil', 1_750_000, 1_500_000, 1_250_000],
+    ['Bandung', 'Mobil', 2_500_000, 3_000_000, 1_000_000],
+    ['Bogor', 'Motor', 1_250_000, 1_350_000, 800_000],
+    ['Serang', 'Motor', 1_250_000, 1_350_000, 800_000],
+    ['Cilegon', 'Motor', 1_450_000, 1_400_000, 1_100_000],
+  ]
+
+  it.each(mutasi)('Mutasi %s - Jakarta %s, berlaku bolak-balik', (wilayah, kendaraan, proses, jasa, penulisan) => {
+    for (const [asal, tujuan] of [
+      [wilayah, 'Jakarta'],
+      ['Jakarta', wilayah],
+    ]) {
+      const hasil = hitungEstimasi({
+        ...dasar,
+        jasa: 'Mutasi',
+        kendaraan,
+        kecamatanAsal: asal,
+        kecamatanTujuan: tujuan,
+      })
+      expect(baris(hasil, 'biayaProses')).toBe(proses)
+      expect(baris(hasil, 'jasaUtama')).toBe(jasa)
+      expect(baris(hasil, 'penulisan')).toBe(penulisan)
+      expect(hasil.peringatan.filter((p) => p.tingkat === 'gagal')).toEqual([])
+    }
+  })
+
+  it.each(bbn)('BBN %s %s', (wilayah, kendaraan, proses, jasa, penulisan) => {
+    const hasil = hitungEstimasi({ ...dasar, jasa: 'BBN', kendaraan, kecamatanAsal: wilayah })
+    expect(baris(hasil, 'biayaProses')).toBe(proses)
+    expect(baris(hasil, 'jasaUtama')).toBe(jasa)
+    expect(baris(hasil, 'penulisan')).toBe(penulisan)
+    expect(hasil.peringatan.filter((p) => p.tingkat === 'gagal')).toEqual([])
+  })
+
+  it('pickup memakai harga mobil', () => {
+    const hasil = hitungEstimasi({
+      ...dasar,
+      jasa: 'Mutasi',
+      kendaraan: 'Pickup',
+      kecamatanAsal: 'Bogor',
+      kecamatanTujuan: 'Jakarta',
+    })
+    expect(baris(hasil, 'biayaProses')).toBe(2_500_000)
+    expect(baris(hasil, 'jasaUtama')).toBe(2_200_000)
+  })
+
+  it('motor Bandung tetap memakai harga lama, tanpa biaya proses', () => {
+    const mutasiBandung = hitungEstimasi({
+      ...dasar,
+      jasa: 'Mutasi',
+      kendaraan: 'Motor',
+      kecamatanAsal: 'Bandung',
+      kecamatanTujuan: 'Jakarta',
+    })
+    expect(baris(mutasiBandung, 'biayaProses')).toBe(0)
+    expect(baris(mutasiBandung, 'jasaUtama')).toBe(4_500_000)
+    expect(baris(mutasiBandung, 'penulisan')).toBe(1_500_000)
+
+    const bbnBandung = hitungEstimasi({
+      ...dasar,
+      jasa: 'BBN',
+      kendaraan: 'Motor',
+      kecamatanAsal: 'Bandung',
+    })
+    expect(baris(bbnBandung, 'biayaProses')).toBe(0)
+    expect(baris(bbnBandung, 'jasaUtama')).toBe(3_250_000)
+  })
+
+  it('rute lain tidak berubah', () => {
+    // Mutasi Bogor ke Serpong bukan rute Jakarta.
+    const bogorSerpong = hitungEstimasi({
+      ...dasar,
+      jasa: 'Mutasi',
+      kecamatanAsal: 'Bogor',
+      kecamatanTujuan: 'Serpong',
+      samsatTujuanPilihan: 'Serpong',
+    })
+    expect(baris(bogorSerpong, 'biayaProses')).toBe(0)
+    expect(baris(bogorSerpong, 'jasaUtama')).toBe(4_250_000)
+
+    // BBN Jakarta tetap memakai tabel rute.
+    const bbnJakarta = hitungEstimasi({ ...dasar, jasa: 'BBN', kecamatanAsal: 'Jakarta' })
+    expect(baris(bbnJakarta, 'biayaProses')).toBe(0)
+    expect(baris(bbnJakarta, 'jasaUtama')).toBe(650_000)
+
+    // Pindah Alamat tidak termasuk.
+    const pindah = hitungEstimasi({
+      ...dasar,
+      jasa: 'Pindah Alamat',
+      kecamatanAsal: 'Bogor',
+      kecamatanTujuan: 'Jakarta',
+    })
+    expect(baris(pindah, 'biayaProses')).toBe(0)
+    expect(baris(pindah, 'jasaUtama')).toBe(3_350_000)
+  })
+
+  it('biaya proses ikut masuk total', () => {
+    const hasil = hitungEstimasi({
+      ...dasar,
+      jasa: 'Mutasi',
+      kecamatanAsal: 'Serang',
+      kecamatanTujuan: 'Jakarta',
+    })
+    expect(subtotal(hasil, 'lain')).toBe(2_500_000 + 900_000)
+  })
+
+  it('tidak berlaku untuk pengurusan luar kota', () => {
+    const hasil = hitungEstimasi({
+      ...dasar,
+      jasa: 'Mutasi',
+      kecamatanAsal: 'Bogor',
+      kecamatanTujuan: 'Jakarta',
+      pengurusanJauh: true,
+    })
+    expect(baris(hasil, 'biayaProses')).toBe(0)
+  })
+})

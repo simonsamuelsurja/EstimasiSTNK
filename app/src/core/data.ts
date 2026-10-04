@@ -11,6 +11,7 @@ import ruteJson from '../data/rute.json'
 import perpanjangJson from '../data/perpanjang.json'
 import perpanjangAccJson from '../data/perpanjang-acc.json'
 import catatanJauhJson from '../data/catatan-jasa-jauh.json'
+import hargaKhususJson from '../data/harga-khusus-jakarta.json'
 
 export interface BarisKecamatan {
   kecamatan: string
@@ -56,12 +57,30 @@ export interface BarisCatatanJauh {
   akomodasi: number | null
 }
 
+/**
+ * Harga khusus Mutasi dari/ke Jakarta dan BBN di wilayah tertentu.
+ *
+ * Untuk kombinasi yang terdaftar di sini, jasa dan penulisan BPKB memakai
+ * angka tabel ini, dan ada tambahan biaya proses. Kombinasi yang tidak
+ * terdaftar tetap memakai tabel rute dan tarif penulisan biasa.
+ */
+export interface BarisHargaKhusus {
+  layanan: 'BBN' | 'Mutasi'
+  kendaraan: 'Mobil' | 'Motor'
+  /** Wilayah selain Jakarta. Untuk Mutasi, pasangannya selalu Jakarta. */
+  wilayah: string
+  biayaProses: number
+  jasa: number
+  penulisanBpkb: number
+}
+
 export const daftarKecamatan = kecamatanJson as BarisKecamatan[]
 export const daftarSamsat = samsatJson as BarisSamsat[]
 export const daftarRute = ruteJson as BarisRute[]
 export const daftarPerpanjang = perpanjangJson as BarisPerpanjang[]
 export const daftarPerpanjangAcc = perpanjangAccJson as BarisPerpanjangAcc[]
 export const catatanJasaJauh = catatanJauhJson as BarisCatatanJauh[]
+export const daftarHargaKhusus = hargaKhususJson as BarisHargaKhusus[]
 
 /** Pilihan khusus untuk daerah yang tidak ada di daftar. */
 export const KECAMATAN_LAINNYA = 'Lainnya'
@@ -134,6 +153,43 @@ export function cariRuteSearah(dari: string, ke: string): BarisRute | null {
 /** Mencari rute dua arah, seperti lookup Mutasi dan Pindah Alamat di Excel. */
 export function cariRuteDuaArah(dari: string, ke: string): BarisRute | null {
   return cariRuteSearah(dari, ke) ?? cariRuteSearah(ke, dari)
+}
+
+/** Samsat yang menjadi pasangan harga khusus Mutasi. */
+export const SAMSAT_JAKARTA = 'Jakarta'
+
+const indeksHargaKhusus = new Map(
+  daftarHargaKhusus.map((h) => [
+    `${kunci(h.layanan)}|${kunci(h.kendaraan)}|${kunci(h.wilayah)}`,
+    h,
+  ]),
+)
+
+/**
+ * Mencari harga khusus.
+ *
+ * Mutasi berlaku dua arah: dari wilayah ke Jakarta maupun sebaliknya.
+ * BBN berlaku untuk wilayah itu sendiri, karena BBN tidak berpindah wilayah.
+ */
+export function cariHargaKhusus(
+  layanan: string,
+  kendaraan: 'Mobil' | 'Motor',
+  samsatAsal: string | null,
+  samsatTujuan: string | null,
+): BarisHargaKhusus | null {
+  if (!samsatAsal || !samsatTujuan) return null
+  const asal = kunci(samsatAsal)
+  const tujuan = kunci(samsatTujuan)
+  let wilayah: string | null = null
+  if (layanan === 'Mutasi') {
+    const jakarta = kunci(SAMSAT_JAKARTA)
+    if (asal === jakarta && tujuan !== jakarta) wilayah = tujuan
+    else if (tujuan === jakarta && asal !== jakarta) wilayah = asal
+  } else if (layanan === 'BBN' && asal === tujuan) {
+    wilayah = asal
+  }
+  if (!wilayah) return null
+  return indeksHargaKhusus.get(`${kunci(layanan)}|${kunci(kendaraan)}|${wilayah}`) ?? null
 }
 
 const indeksPerpanjang = new Map(

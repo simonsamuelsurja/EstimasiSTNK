@@ -11,6 +11,7 @@
 
 import {
   catatanJasaJauh,
+  daftarHargaKhusus,
   daftarKecamatan,
   daftarPerpanjang,
   daftarPerpanjangAcc,
@@ -68,6 +69,21 @@ export function katalogHarga(tarif: Tarif[] = TARIF_BAWAAN): TabelHarga[] {
         { kunci: 'pindahMotor', judul: 'Pindah Alamat Motor', jenis: 'rupiah' },
       ],
       baris: daftarRute as unknown as Record<string, unknown>[],
+    },
+    {
+      kode: 'harga-khusus-jakarta',
+      nama: 'Harga Khusus Jakarta',
+      keterangan:
+        'Mutasi dari/ke Jakarta dan BBN di wilayah tertentu. Bila kombinasinya ada di sini, jasa dan penulisan BPKB memakai angka tabel ini dan ditambah biaya proses.',
+      kolom: [
+        { kunci: 'layanan', judul: 'Layanan', jenis: 'teks' },
+        { kunci: 'kendaraan', judul: 'Kendaraan', jenis: 'teks' },
+        { kunci: 'wilayah', judul: 'Wilayah', jenis: 'teks' },
+        { kunci: 'biayaProses', judul: 'Biaya Proses', jenis: 'rupiah' },
+        { kunci: 'jasa', judul: 'Jasa', jenis: 'rupiah' },
+        { kunci: 'penulisanBpkb', judul: 'Penulisan BPKB', jenis: 'rupiah' },
+      ],
+      baris: daftarHargaKhusus as unknown as Record<string, unknown>[],
     },
     {
       kode: 'perpanjang',

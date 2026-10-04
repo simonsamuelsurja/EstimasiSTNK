@@ -10,6 +10,7 @@
  */
 
 import {
+  cariHargaKhusus,
   cariHargaPerpanjang,
   cariHargaPerpanjangAcc,
   cariRuteDuaArah,
@@ -17,6 +18,7 @@ import {
   samsatDariKecamatan,
   samsatJabodetabek,
   KECAMATAN_LAINNYA,
+  type BarisHargaKhusus,
 } from './data'
 import { ambilTarif, petaTarif, type PetaTarif } from './tarif'
 import {
@@ -130,6 +132,8 @@ interface Konteks {
   bulanTelat: number
   tahunJr: number
   skpPerBulan: number
+  /** Harga khusus Mutasi dari/ke Jakarta atau BBN wilayah tertentu, bila berlaku. */
+  hargaKhusus: BarisHargaKhusus | null
   peringatan: Peringatan[]
 }
 
@@ -327,6 +331,8 @@ function hitungJasa(k: Konteks): number {
     return didukung ? ambilTarif(t, 'jauh.jasa') : 0
   }
 
+  if (k.hargaKhusus) return k.hargaKhusus.jasa
+
   const butuhRute = JASA_PAKAI_RUTE.includes(input.jasa)
   if (butuhRute) {
     if (!samsatAsal || !samsatTujuan) {
@@ -412,6 +418,8 @@ function hitungPenulisan(k: Konteks): number {
     }
     return ambilTarif(t, `penulisan.${jenis}.${grup}.${sisi}`)
   }
+
+  if (k.hargaKhusus) return k.hargaKhusus.penulisanBpkb
 
   if (input.jasa === 'BBN' || input.jasa === 'Mutasi') {
     if (!jadetabek) return ambilTarif(t, 'penulisan.bbnLuarJadetabek')
@@ -521,6 +529,10 @@ export function hitungEstimasi(
     bulanTelat,
     tahunJr,
     skpPerBulan: skpSatuBulan(input.pkb, ambilTarif(tarif, 'denda.persenSkp')),
+    // Pengurusan luar kota punya hitungan sendiri, jadi harga khusus tidak ikut.
+    hargaKhusus: input.pengurusanJauh
+      ? null
+      : cariHargaKhusus(input.jasa, kolomKendaraan(input.kendaraan), samsatAsal, samsatTujuan),
     peringatan,
   }
 
@@ -553,6 +565,7 @@ export function hitungEstimasi(
         : 0
 
   // --- Kelompok 5: biaya lain (Excel I27)
+  const biayaProses = k.hargaKhusus?.biayaProses ?? 0
   const penulisan = hitungPenulisan(k)
   const stnkHilangTambahan =
     input.jasa !== 'STNK Hilang' && input.stnkHilang ? jasaStnkHilang(k) : 0
@@ -584,7 +597,12 @@ export function hitungEstimasi(
         rincian: `${hitungLembarGesek(cekFisik, tarif)} lembar`,
       },
       { kode: 'bukaBlokir', label: 'Buka Blokir', nilai: bukaBlokir },
-      { kode: 'jasaUtama', label: 'Jasa', nilai: jasa },
+      {
+        kode: 'jasaUtama',
+        label: 'Jasa',
+        nilai: jasa,
+        rincian: k.hargaKhusus ? 'Harga khusus' : undefined,
+      },
     ]),
     susunKelompok('nopol', 'Nopol Pilihan', [
       { kode: 'matikanNopol', label: 'Matikan Nopol', nilai: matikanNopol },
@@ -592,6 +610,7 @@ export function hitungEstimasi(
       { kode: 'admNopol', label: 'Administrasi Nopol', nilai: admNopol },
     ]),
     susunKelompok('lain', 'Biaya Lain', [
+      { kode: 'biayaProses', label: 'Biaya Proses', nilai: biayaProses },
       { kode: 'penulisan', label: 'Penulisan BPKB', nilai: penulisan },
       { kode: 'stnkHilangTambahan', label: 'STNK Hilang', nilai: stnkHilangTambahan },
       { kode: 'etle', label: 'Cadangan ETLE', nilai: etle },
