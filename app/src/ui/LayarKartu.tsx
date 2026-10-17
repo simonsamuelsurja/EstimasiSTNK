@@ -14,7 +14,13 @@ import { KartuEstimasi } from './KartuEstimasi'
 
 type Keadaan = 'menggambar' | 'siap' | 'gagal'
 
-export function LayarKartu({ hasil }: { hasil: HasilDenganPenyesuaian }) {
+export function LayarKartu({
+  hasil,
+  onMulaiBaru,
+}: {
+  hasil: HasilDenganPenyesuaian
+  onMulaiBaru: () => void
+}) {
   const panggung = useRef<HTMLDivElement>(null)
   const [gambar, setGambar] = useState<string | null>(null)
   const [keadaan, setKeadaan] = useState<Keadaan>('menggambar')
@@ -122,6 +128,15 @@ export function LayarKartu({ hasil }: { hasil: HasilDenganPenyesuaian }) {
         Di HP, <b>Simpan Gambar</b> membuka menu berbagi bawaan sehingga bisa langsung dikirim ke
         WhatsApp. Di komputer, gambarnya diunduh sebagai berkas.
       </p>
+      <Kartu judul="Estimasi Berikutnya">
+        <p className="keterangan">
+          Mulai dari awal dengan isian kosong. Semua angka dan penyesuaian manual estimasi ini
+          akan direset.
+        </p>
+        <button type="button" className="tombol tombol-kedua" onClick={onMulaiBaru}>
+          Kembali ke Awal &amp; Reset
+        </button>
+      </Kartu>
     </>
   )
 }

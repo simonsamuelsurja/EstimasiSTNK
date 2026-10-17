@@ -1,7 +1,7 @@
 /** Komponen dasar yang dipakai berulang di seluruh tampilan. */
 
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
-import { angkaRupiah, bacaAngka } from './format'
+import { angkaRupiah, bacaAngka, bacaPenjumlahanRupiah, rupiah } from './format'
 
 // --------------------------------------------------------------------- kartu
 
@@ -78,6 +78,52 @@ export function IsianRupiah({
         onUbah(n)
       }}
     />
+  )
+}
+
+/** PKB dapat diisi satu nominal atau penjumlahan nominal rupiah. */
+export function IsianPkb({
+  nilai,
+  teks,
+  onUbah,
+}: {
+  nilai: number
+  teks?: string
+  onUbah: (nilai: number, teks: string) => void
+}) {
+  const petunjukId = useId()
+  const masukan = teks ?? (nilai ? angkaRupiah(nilai) : '')
+  const total = bacaPenjumlahanRupiah(masukan)
+
+  return (
+    <>
+      <input
+        type="text"
+        inputMode="text"
+        aria-label="Pajak kendaraan bermotor"
+        aria-describedby={petunjukId}
+        aria-invalid={total === null}
+        placeholder="0 atau 22353000+1034000"
+        value={masukan}
+        onChange={(e) => {
+          const baru = e.target.value
+          onUbah(bacaPenjumlahanRupiah(baru) ?? 0, baru)
+        }}
+        onBlur={() => {
+          if (total !== null && masukan.trim()) {
+            const rapi = masukan.split('+').map((angka) => angkaRupiah(bacaAngka(angka))).join(' + ')
+            onUbah(total, rapi)
+          }
+        }}
+      />
+      <span className="petunjuk" id={petunjukId} aria-live="polite">
+        {total === null
+          ? 'Lengkapi setiap angka. Gunakan tanda + untuk penjumlahan, misalnya 22353000+1034000.'
+          : masukan.includes('+')
+            ? `Total PKB: ${rupiah(total)}`
+            : 'Bisa isi satu angka atau penjumlahan, misalnya 22353000+1034000.'}
+      </span>
+    </>
   )
 }
 

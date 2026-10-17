@@ -13,7 +13,7 @@ import {
   type JenisKendaraan,
   type PilihanNopol,
 } from '../core/tipe'
-import { BarisIsian, IsianRupiah, Kartu, Sakelar, Segmen } from './dasar'
+import { BarisIsian, IsianPkb, IsianRupiah, Kartu, Sakelar, Segmen } from './dasar'
 import { tanggalHariIni } from './format'
 import { PilihDaerah } from './PilihDaerah'
 import { PilihTanggal } from './PilihTanggal'
@@ -124,10 +124,10 @@ export function FormEstimasi({
 
       <Kartu judul="Pajak Kendaraan">
         <BarisIsian label="PKB" petunjuk="Sesuai yang tertera di STNK">
-          <IsianRupiah
+          <IsianPkb
             nilai={nilai.pkb}
-            onUbah={(n) => onUbah({ pkb: n })}
-            ariaLabel="Pajak kendaraan bermotor"
+            teks={nilai.pkbPenjumlahan}
+            onUbah={(pkb, pkbPenjumlahan) => onUbah({ pkb, pkbPenjumlahan })}
           />
         </BarisIsian>
 

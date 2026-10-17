@@ -16,7 +16,7 @@ import { FormEstimasi } from './ui/FormEstimasi'
 import { HalamanHarga } from './ui/HalamanHarga'
 import { HasilEstimasi } from './ui/HasilEstimasi'
 import { LayarKartu } from './ui/LayarKartu'
-import { rupiah, tanggalHariIni } from './ui/format'
+import { bacaPenjumlahanRupiah, rupiah, tanggalHariIni } from './ui/format'
 
 const KUNCI_DRAF = 'estimasi-stnk.draf'
 
@@ -117,6 +117,16 @@ export default function App() {
   const ubah = (perubahan: Partial<InputEstimasi>) =>
     setInput((lama) => ({ ...lama, ...perubahan }))
 
+  const mulaiEstimasiBaru = () => {
+    setInput({ ...AWAL, tanggalStnk: tanggalHariIni() })
+    setPenyesuaian([])
+    setLayar('isian')
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }
+
+  const pkbBelumValid =
+    input.pkbPenjumlahan !== undefined && bacaPenjumlahanRupiah(input.pkbPenjumlahan) === null
+
   const adaGagal = hasil.peringatan.some((p) => p.tingkat === 'gagal')
   const adaIsianHarga = Object.keys(isian.tarif).length > 0 || isian.rute.length > 0
 
@@ -167,7 +177,7 @@ export default function App() {
             onUbahPenyesuaian={setPenyesuaian}
           />
         ) : (
-          <LayarKartu hasil={hasil} />
+          <LayarKartu hasil={hasil} onMulaiBaru={mulaiEstimasiBaru} />
         )}
 
         {halaman === 'harga' && adaIsianHarga && (
@@ -202,6 +212,7 @@ export default function App() {
             <button
               type="button"
               className="tombol tombol-utama"
+              disabled={layar === 'isian' && pkbBelumValid}
               onClick={() =>
                 setLayar(layar === 'kartu' ? 'isian' : LANGKAH[LANGKAH.indexOf(layar) + 1])
               }

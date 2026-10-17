@@ -17,6 +17,15 @@ export function bacaAngka(teks: string): number {
   return bersih ? Number(bersih) : 0
 }
 
+/** Membaca nominal rupiah atau penjumlahannya, tanpa menjalankan kode masukan. */
+export function bacaPenjumlahanRupiah(teks: string): number | null {
+  if (!teks.trim()) return 0
+  const bagian = teks.split('+').map((angka) => angka.trim())
+  if (bagian.some((angka) => !/^\d+(?:\.\d{3})*$/.test(angka))) return null
+  const total = bagian.reduce((jumlah, angka) => jumlah + Number(angka.replace(/\./g, '')), 0)
+  return Number.isSafeInteger(total) ? total : null
+}
+
 const NAMA_BULAN = [
   'Januari',
   'Februari',

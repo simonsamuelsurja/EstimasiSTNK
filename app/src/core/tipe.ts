@@ -85,6 +85,8 @@ export interface InputEstimasi {
 
   gantiKaleng: boolean
   pkb: number
+  /** Teks PKB, termasuk penjumlahan, supaya tetap tersedia saat kembali ke isian. */
+  pkbPenjumlahan?: string
   swdkllj: number
 
   /** Menambahkan biaya jasa STNK hilang walau jenis jasanya bukan itu. */
