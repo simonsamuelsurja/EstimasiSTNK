@@ -88,6 +88,8 @@ export interface InputEstimasi {
   /** Teks PKB, termasuk penjumlahan, supaya tetap tersedia saat kembali ke isian. */
   pkbPenjumlahan?: string
   swdkllj: number
+  /** Mempertahankan pilihan ketik sendiri, termasuk saat nominalnya sama dengan preset. */
+  swdklljManual?: boolean
 
   /** Menambahkan biaya jasa STNK hilang walau jenis jasanya bukan itu. */
   stnkHilang: boolean

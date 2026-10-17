@@ -195,6 +195,26 @@ export function Lembar({
   children: ReactNode
 }) {
   const panel = useRef<HTMLDivElement>(null)
+  const tirai = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Keyboard HP mengecilkan visual viewport, bukan selalu layout viewport.
+    // Batasi panel ke area yang benar-benar terlihat, termasuk saat iOS menggesernya.
+    const viewport = window.visualViewport
+    const sesuaikan = () => {
+      tirai.current?.style.setProperty('--tinggi-viewport', `${viewport?.height ?? window.innerHeight}px`)
+      tirai.current?.style.setProperty('--atas-viewport', `${viewport?.offsetTop ?? 0}px`)
+    }
+    sesuaikan()
+    viewport?.addEventListener('resize', sesuaikan)
+    viewport?.addEventListener('scroll', sesuaikan)
+    window.addEventListener('resize', sesuaikan)
+    return () => {
+      viewport?.removeEventListener('resize', sesuaikan)
+      viewport?.removeEventListener('scroll', sesuaikan)
+      window.removeEventListener('resize', sesuaikan)
+    }
+  }, [])
 
   useEffect(() => {
     const padaTombol = (e: KeyboardEvent) => {
@@ -212,6 +232,7 @@ export function Lembar({
   return (
     <div
       className="tirai"
+      ref={tirai}
       onMouseDown={(e) => {
         if (!panel.current?.contains(e.target as Node)) onTutup()
       }}

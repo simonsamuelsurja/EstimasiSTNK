@@ -29,6 +29,7 @@ export function FormEstimasi({
 }) {
   const perluTujuan = JASA_PERLU_TUJUAN.includes(nilai.jasa)
   const perpanjangan = JASA_PERPANJANG.includes(nilai.jasa)
+  const swdklljManual = nilai.swdklljManual ?? ![0, 143_000, 35_000].includes(nilai.swdkllj)
 
   const bulanTelat = hitungBulanTelat(
     nilai.tanggalStnk,
@@ -132,11 +133,26 @@ export function FormEstimasi({
         </BarisIsian>
 
         <BarisIsian label="SWDKLLJ">
-          <IsianRupiah
-            nilai={nilai.swdkllj}
-            onUbah={(n) => onUbah({ swdkllj: n })}
-            ariaLabel="SWDKLLJ"
-          />
+          <select
+            aria-label="SWDKLLJ"
+            value={swdklljManual ? 'manual' : nilai.swdkllj || ''}
+            onChange={(e) => onUbah({
+              swdkllj: e.target.value === 'manual' ? 0 : Number(e.target.value),
+              swdklljManual: e.target.value === 'manual',
+            })}
+          >
+            <option value="" disabled>Pilih nominal</option>
+            <option value="143000">Rp 143.000</option>
+            <option value="35000">Rp 35.000</option>
+            <option value="manual">Ketik sendiri</option>
+          </select>
+          {swdklljManual && (
+            <IsianRupiah
+              nilai={nilai.swdkllj}
+              onUbah={(swdkllj) => onUbah({ swdkllj })}
+              ariaLabel="SWDKLLJ manual"
+            />
+          )}
         </BarisIsian>
       </Kartu>
 

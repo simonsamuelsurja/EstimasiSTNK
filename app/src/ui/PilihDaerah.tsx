@@ -84,18 +84,6 @@ export function PilihDaerah({
           </div>
 
           <ul className="daftar-pilihan">
-            <li>
-              <button
-                type="button"
-                onClick={() => {
-                  onUbah(KECAMATAN_LAINNYA, undefined)
-                  setTerbuka(false)
-                }}
-              >
-                <span>{KECAMATAN_LAINNYA}</span>
-                <span className="samsat">di luar daftar</span>
-              </button>
-            </li>
             {hasil.map((k) => (
               <li key={`${k.kecamatan}|${k.samsat}`}>
                 <button
@@ -115,6 +103,18 @@ export function PilihDaerah({
                 </button>
               </li>
             ))}
+            <li>
+              <button
+                type="button"
+                onClick={() => {
+                  onUbah(KECAMATAN_LAINNYA, undefined)
+                  setTerbuka(false)
+                }}
+              >
+                <span>{KECAMATAN_LAINNYA}</span>
+                <span className="samsat">di luar daftar</span>
+              </button>
+            </li>
           </ul>
 
           {hasil.length === 0 && (

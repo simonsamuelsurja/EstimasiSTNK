@@ -70,6 +70,12 @@ export function LayarKartu({
         <KartuEstimasi hasil={hasil} ref={panggung} />
       </div>
 
+      <div className="tombol-berjajar">
+        <button type="button" className="tombol tombol-kedua" onClick={onMulaiBaru}>
+          Kembali ke Awal &amp; Reset
+        </button>
+      </div>
+
       {!kartuLayakDikirim(hasil) && (
         <Peringatan tingkat="gagal">
           <span>
@@ -128,15 +134,6 @@ export function LayarKartu({
         Di HP, <b>Simpan Gambar</b> membuka menu berbagi bawaan sehingga bisa langsung dikirim ke
         WhatsApp. Di komputer, gambarnya diunduh sebagai berkas.
       </p>
-      <Kartu judul="Estimasi Berikutnya">
-        <p className="keterangan">
-          Mulai dari awal dengan isian kosong. Semua angka dan penyesuaian manual estimasi ini
-          akan direset.
-        </p>
-        <button type="button" className="tombol tombol-kedua" onClick={onMulaiBaru}>
-          Kembali ke Awal &amp; Reset
-        </button>
-      </Kartu>
     </>
   )
 }

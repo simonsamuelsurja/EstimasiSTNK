@@ -546,7 +546,8 @@ button:focus-visible,
 
 .tirai {
   position: fixed;
-  inset: 0;
+  inset: var(--atas-viewport, 0px) 0 auto;
+  height: var(--tinggi-viewport, 100dvh);
   z-index: 50;
   background: rgb(10 13 16 / 45%);
   display: flex;
@@ -557,7 +558,8 @@ button:focus-visible,
 .lembar {
   width: 100%;
   max-width: 560px;
-  max-height: 88vh;
+  max-height: 88%;
+  min-height: 0;
   background: var(--kartu);
   border-radius: 16px 16px 0 0;
   display: flex;
@@ -573,11 +575,12 @@ button:focus-visible,
 
   .lembar {
     border-radius: 16px;
-    max-height: 82vh;
+    max-height: 82%;
   }
 }
 
 .lembar-kepala {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -593,12 +596,15 @@ button:focus-visible,
 }
 
 .lembar-isi {
+  min-height: 0;
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 14px 16px 18px;
   -webkit-overflow-scrolling: touch;
 }
 
 .lembar-kaki {
+  flex-shrink: 0;
   display: flex;
   gap: 10px;
   padding: 12px 16px;
@@ -663,6 +669,11 @@ button:focus-visible,
 }
 
 .pencarian {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--kartu);
+  padding-bottom: 8px;
   margin-bottom: 4px;
 }
 
@@ -1124,4 +1135,21 @@ button:focus-visible,
 .pilih-tanggal select {
   min-width: 0;
   font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 559px) {
+  .pilih-tanggal {
+    max-width: 300px;
+    grid-template-columns: 0.8fr 1.6fr 1.1fr;
+    gap: 6px;
+  }
+
+  .pilih-tanggal select {
+    min-height: 40px;
+    padding: 6px 24px 6px 10px;
+    background-position:
+      calc(100% - 14px) calc(50% + 2px),
+      calc(100% - 10px) calc(50% + 2px);
+    background-size: 4px 4px;
+  }
 }
