@@ -195,6 +195,7 @@ body {
 input[type='text'],
 input[type='date'],
 input[type='number'],
+.tanggal-pemicu,
 select,
 .pemicu-pilih {
   width: 100%;
@@ -209,7 +210,8 @@ select,
   appearance: none;
 }
 
-select {
+select,
+.tanggal-pemicu {
   background-image: linear-gradient(45deg, transparent 50%, var(--teks-lembut) 50%),
     linear-gradient(135deg, var(--teks-lembut) 50%, transparent 50%);
   background-position:
@@ -1132,7 +1134,7 @@ button:focus-visible,
   gap: 8px;
 }
 
-.pilih-tanggal select {
+.pilih-tanggal .tanggal-pemicu {
   min-width: 0;
   font-variant-numeric: tabular-nums;
 }
@@ -1144,7 +1146,7 @@ button:focus-visible,
     gap: 6px;
   }
 
-  .pilih-tanggal select {
+  .pilih-tanggal .tanggal-pemicu {
     min-height: 40px;
     padding: 6px 24px 6px 10px;
     background-position:
@@ -1152,4 +1154,47 @@ button:focus-visible,
       calc(100% - 10px) calc(50% + 2px);
     background-size: 4px 4px;
   }
+}
+
+
+.tanggal-pemicu {
+  text-align: left;
+  cursor: pointer;
+}
+
+.tanggal-daftar {
+  position: fixed;
+  z-index: 60;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  margin: 0;
+  padding: 4px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+  background: var(--kartu);
+  color: var(--teks);
+  border: 1px solid var(--garis-tebal);
+  border-radius: var(--radius-kecil);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 16%);
+}
+
+.tanggal-daftar [role='option'] {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.tanggal-daftar [aria-selected='true'] {
+  color: var(--aksen);
+  font-weight: 650;
+}
+
+.tanggal-daftar [data-aktif='true'],
+.tanggal-daftar [role='option']:hover {
+  background: var(--aksen-lembut);
 }

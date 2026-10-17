@@ -2,9 +2,12 @@
  * Pemilih tanggal tiga dropdown: tanggal, bulan, tahun.
  *
  * Yang tampil hanya tanggal terpilih, supaya formulir tetap ringkas. Daftar
- * pilihan baru terbuka saat salah satu bagian disentuh, dan di ponsel
- * memakai pemilih bawaan perangkat yang sudah akrab bagi staf.
+ * pilihan tampil sebagai panel kecil di dekat kolom, termasuk di HP.
+ * Tidak memakai select bawaan yang dapat membuka pemilih satu layar penuh.
  */
+
+import { useEffect, useId, useRef, useState, type CSSProperties } from 'react'
+import { createPortal } from 'react-dom'
 
 const NAMA_BULAN = [
   'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
@@ -53,42 +56,147 @@ export function PilihTanggal({
 
   return (
     <div className="pilih-tanggal" role="group" aria-label={label}>
-      <select
-        value={hari}
-        onChange={(e) => ubah(tahun, bulan, Number(e.target.value))}
-        aria-label="Tanggal"
-      >
-        {daftarHari.map((h) => (
-          <option key={h} value={h}>
-            {h}
-          </option>
-        ))}
-      </select>
-      <select
-        value={bulan}
-        onChange={(e) => ubah(tahun, Number(e.target.value), hari)}
-        aria-label="Bulan"
-      >
-        {NAMA_BULAN.map((n, i) => (
-          <option key={n} value={i + 1}>
-            {n}
-          </option>
-        ))}
-      </select>
-      <select
-        value={tahun}
-        onChange={(e) => ubah(Number(e.target.value), bulan, hari)}
-        aria-label="Tahun"
-      >
-        {/* Tahun di luar jangkauan tetap ditampilkan supaya isian lama tidak
-            diam-diam berubah jadi tahun lain. */}
-        {!DAFTAR_TAHUN.includes(tahun) && <option value={tahun}>{tahun}</option>}
-        {DAFTAR_TAHUN.map((t) => (
-          <option key={t} value={t}>
-            {t}
-          </option>
-        ))}
-      </select>
+      <DropdownTanggal
+        label="Tanggal"
+        nilai={hari}
+        pilihan={daftarHari.map((h) => ({ nilai: h, teks: String(h) }))}
+        onUbah={(h) => ubah(tahun, bulan, h)}
+      />
+      <DropdownTanggal
+        label="Bulan"
+        nilai={bulan}
+        pilihan={NAMA_BULAN.map((teks, i) => ({ nilai: i + 1, teks }))}
+        onUbah={(b) => ubah(tahun, b, hari)}
+      />
+      <DropdownTanggal
+        label="Tahun"
+        nilai={tahun}
+        pilihan={(DAFTAR_TAHUN.includes(tahun) ? DAFTAR_TAHUN : [tahun, ...DAFTAR_TAHUN])
+          .map((t) => ({ nilai: t, teks: String(t) }))}
+        onUbah={(t) => ubah(t, bulan, hari)}
+      />
     </div>
+  )
+}
+
+
+interface PilihanTanggal {
+  nilai: number
+  teks: string
+}
+
+/** Daftar dibatasi tingginya dan dipasang di body agar tidak terpotong kartu. */
+function DropdownTanggal({ label, nilai, pilihan, onUbah }: {
+  label: string
+  nilai: number
+  pilihan: PilihanTanggal[]
+  onUbah: (nilai: number) => void
+}) {
+  const id = useId()
+  const tombol = useRef<HTMLButtonElement>(null)
+  const daftar = useRef<HTMLUListElement>(null)
+  const [terbuka, setTerbuka] = useState(false)
+  const [aktif, setAktif] = useState(0)
+  const [posisi, setPosisi] = useState<CSSProperties>({})
+  const terpilih = Math.max(0, pilihan.findIndex((p) => p.nilai === nilai))
+
+  const buka = () => {
+    const kotak = tombol.current!.getBoundingClientRect()
+    const viewport = window.visualViewport
+    const tinggi = viewport?.height ?? window.innerHeight
+    const atas = viewport?.offsetTop ?? 0
+    const tinggiDaftar = Math.min(220, tinggi * 0.35, pilihan.length * 40 + 8)
+    const keAtas = atas + tinggi - kotak.bottom < tinggiDaftar + 8 && kotak.top - atas > tinggiDaftar
+    setPosisi({
+      left: kotak.left,
+      top: keAtas ? kotak.top - tinggiDaftar - 4 : kotak.bottom + 4,
+      minWidth: kotak.width,
+      maxHeight: tinggiDaftar,
+    })
+    setAktif(terpilih)
+    setTerbuka(true)
+  }
+
+  useEffect(() => {
+    if (!terbuka) return
+    const diLuar = (e: PointerEvent) => {
+      if (!tombol.current?.contains(e.target as Node) && !daftar.current?.contains(e.target as Node)) {
+        setTerbuka(false)
+      }
+    }
+    const tutup = () => setTerbuka(false)
+    document.addEventListener('pointerdown', diLuar)
+    window.addEventListener('resize', tutup)
+    window.addEventListener('scroll', tutup)
+    window.visualViewport?.addEventListener('resize', tutup)
+    return () => {
+      document.removeEventListener('pointerdown', diLuar)
+      window.removeEventListener('resize', tutup)
+      window.removeEventListener('scroll', tutup)
+      window.visualViewport?.removeEventListener('resize', tutup)
+    }
+  }, [terbuka])
+
+  useEffect(() => {
+    if (!terbuka || !daftar.current) return
+    const baris = daftar.current.children[aktif] as HTMLElement | undefined
+    if (baris) daftar.current.scrollTop = baris.offsetTop - (daftar.current.clientHeight - baris.offsetHeight) / 2
+  }, [terbuka, aktif])
+
+  const pilih = (indeks: number) => {
+    onUbah(pilihan[indeks].nilai)
+    setTerbuka(false)
+    tombol.current?.focus({ preventScroll: true })
+  }
+
+  return (
+    <>
+      <button
+        ref={tombol}
+        type="button"
+        className="tanggal-pemicu"
+        role="combobox"
+        aria-label={label}
+        aria-haspopup="listbox"
+        aria-expanded={terbuka}
+        aria-controls={terbuka ? id : undefined}
+        aria-activedescendant={terbuka ? `${id}-${aktif}` : undefined}
+        onClick={() => terbuka ? setTerbuka(false) : buka()}
+        onBlur={() => setTerbuka(false)}
+        onKeyDown={(e) => {
+          if (e.key === 'Tab') { setTerbuka(false); return }
+          if (e.key === 'Escape') { e.preventDefault(); setTerbuka(false); return }
+          if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) {
+            e.preventDefault()
+            if (!terbuka) { buka(); return }
+            setAktif(e.key === 'Home' ? 0 : e.key === 'End' ? pilihan.length - 1 :
+              Math.max(0, Math.min(pilihan.length - 1, aktif + (e.key === 'ArrowDown' ? 1 : -1))))
+          } else if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            if (terbuka) pilih(aktif)
+            else buka()
+          }
+        }}
+      >
+        {pilihan[terpilih].teks}
+      </button>
+      {terbuka && createPortal(
+        <ul ref={daftar} id={id} role="listbox" aria-label={label} className="tanggal-daftar" style={posisi}>
+          {pilihan.map((p, i) => (
+            <li
+              key={p.nilai}
+              id={`${id}-${i}`}
+              role="option"
+              aria-selected={p.nilai === nilai}
+              data-aktif={i === aktif}
+              onMouseDown={(e) => e.preventDefault()}
+              onClick={() => pilih(i)}
+            >
+              {p.teks}
+            </li>
+          ))}
+        </ul>, document.body,
+      )}
+    </>
   )
 }
