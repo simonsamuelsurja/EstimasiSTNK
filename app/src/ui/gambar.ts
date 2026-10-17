@@ -84,16 +84,19 @@ export function dataUrlKeBlob(dataUrl: string): Blob {
  * Membagikan gambar lewat menu berbagi bawaan perangkat, kalau tersedia.
  * Ini jalur terbaik di HP: langsung ke WhatsApp tanpa mampir ke galeri.
  */
-export async function bagikanGambar(dataUrl: string, namaBerkas: string): Promise<boolean> {
+export type HasilBerbagi = 'berhasil' | 'dibatalkan' | 'tidak-didukung' | 'gagal'
+
+export async function bagikanGambar(dataUrl: string, namaBerkas: string): Promise<HasilBerbagi> {
   try {
     const berkas = new File([dataUrlKeBlob(dataUrl)], namaBerkas, { type: 'image/png' })
     const bagi = navigator.share as ((data: ShareData) => Promise<void>) | undefined
     const bisa = navigator.canShare as ((data: ShareData) => boolean) | undefined
-    if (!bagi || !bisa || !bisa({ files: [berkas] })) return false
+    if (!bagi || !bisa || !bisa.call(navigator, { files: [berkas] })) return 'tidak-didukung'
+    // Hanya satu berkas PNG. Tanpa teks, judul, atau tautan pendamping.
     await bagi.call(navigator, { files: [berkas] })
-    return true
-  } catch {
-    // Dibatalkan pengguna atau tidak didukung: jatuh ke unduhan biasa.
-    return false
+    return 'berhasil'
+  } catch (error) {
+    if (error instanceof Error && error.name === 'AbortError') return 'dibatalkan'
+    return 'gagal'
   }
 }

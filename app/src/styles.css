@@ -526,6 +526,18 @@ button:focus-visible,
   cursor: not-allowed;
 }
 
+.aksi-gambar .tombol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.aksi-gambar .tombol:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 .tombol-kedua {
   background: var(--kartu);
   color: var(--teks);
